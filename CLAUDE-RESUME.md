@@ -10,33 +10,51 @@ GEO (Generative Engine Optimization) Search Assessment — a system that automat
 
 **Core workflow**: Define keywords → Sample AI platforms → Score & diagnose → Output suggestions
 
-**Design doc**: `GEO搜索能力诊断-初步设计方案.md` contains the full specification with open design questions tracked in tables.
+**Design doc**: `GEO搜索能力诊断-初步设计方案.md` contains the full specification. `INPUT.md` contains the latest requirements update.
 
-## Architecture (Planned)
+## Architecture
 
-The system follows a 4-step pipeline:
+The system is a **skill chain orchestrated by AGENT.md**, not a web application. Pure CLI-driven via Claude Code.
 
-1. **Keyword Management** — Manual YAML input + auto-extraction from Gitee/GitHub Issues and forums. Bilingual (zh/en). Weekly incremental + monthly full re-clustering.
-2. **Multi-Platform Sampling** — Unified sampler interface with per-platform adapters (PerplexitySampler, ChatGPTSampler, DeepSeekSampler). Results stored with citations, mentions, and raw responses.
-3. **Diagnostic Scoring** — LLM-based scoring across 4 dimensions: mention (0-3), citation (0-3), accuracy (0-2), ranking (0-2). Per-keyword per-platform, aggregated with weights: Perplexity×0.35 + ChatGPT×0.40 + DeepSeek×0.25.
-4. **Output** — Frontend dashboard (React/Vue + ECharts), Excel export (openpyxl), improvement suggestions with P0-P2 priority.
+4-step pipeline, each step is a separate skill:
 
-**Planned tech stack**: Python (FastAPI), PostgreSQL, LLM APIs (Perplexity/OpenAI/DeepSeek), Celery Beat for scheduling.
+1. **keyword-generator** — Generate question set from community name + seed keywords
+2. **platform-sampler** — Call AI platform APIs with questions, collect responses
+3. **scoring-engine** — LLM-based scoring across 4 dimensions, output comparison report
+4. **improvement-advisor** — Generate P0-P2 improvement suggestions based on scores
+
+Data flows as JSON between skills, with Markdown output for human review.
+
+## Step 1 Design (keyword-generator) — AGREED
+
+Three parallel generation paths:
+
+- **Path 1: Industry question discovery (了解阶段)** — LLM determines community's domain hierarchy (industry → sub-domain → positioning → competitors), then generates questions by user intent (认知/选型/趋势/场景). Uses competitors for reverse expansion.
+- **Path 2: Usage question extraction (使用阶段)** — Extract from Gitee/GitHub Issues + community forums. Filter pure bugs, cluster similar issues, LLM rewrites to natural language questions. (No official doc directory for now.)
+- **Path 3: AI platform reverse extraction** — Ask multiple AI platforms "what are the most common questions about {community}" and take intersection.
+
+Merge → semantic dedup → classify → output `questions.json` + `questions.md`.
+
+**Human review checkpoint**: After generating questions, PAUSE for human review. Human filters and provides feedback. Feedback is saved to `feedback-rules.md` and incorporated into future question generation as prompt context (learning loop).
+
+**Quantity**: 30-40 questions for MVP (adjustable based on results).
+
+**Output format**: `questions.json` (machine) + `questions.md` (human review). Bilingual zh/en.
 
 ## Current Status
 
-- **Phase**: Design & planning (pre-code)
+- **Phase**: Designing Step 1 (keyword-generator skill)
 - **Branch**: `main`
 - **Last updated**: 2026-03-10
 
 ## TODO
 
-- [ ] Finalize open design questions in `GEO搜索能力诊断-初步设计方案.md`
-- [ ] Set up Python project structure (FastAPI scaffold)
-- [ ] Design keyword YAML config format
-- [ ] Implement platform sampler adapters
-- [ ] Design LLM scoring prompt templates
-- [ ] Set up PostgreSQL schema
+- [ ] Create keyword-generator skill using `/skill-creator`
+- [ ] Create platform-sampler skill
+- [ ] Create scoring-engine skill
+- [ ] Create improvement-advisor skill
+- [ ] Create AGENT.md to orchestrate the full workflow
+- [ ] Design feedback-rules.md format and integration
 
 ## Recent Changes
 
@@ -44,13 +62,22 @@ The system follows a 4-step pipeline:
 |------|--------|
 | 2026-03-10 | Initialized repository with design doc |
 | 2026-03-10 | Installed release-skills and skill-creator to `.claude/skills/` |
-| 2026-03-10 | Configured CLAUDE.md development rules (rules 1-10) |
+| 2026-03-10 | Configured CLAUDE.md development rules (rules 1-11) |
 | 2026-03-10 | Created CLAUDE-RESUME.md for session context recovery |
-| 2026-03-10 | Created README.md with usage rules for CLAUDE-RESUME.md, /release-skills, /skill-creator |
+| 2026-03-10 | Created README.md with usage rules |
+| 2026-03-10 | Released v0.1.0 |
+| 2026-03-10 | Agreed on total architecture: skill chain + AGENT.md orchestration |
+| 2026-03-10 | Agreed on Step 1 design: 3 paths, human review checkpoint, feedback loop |
 
 ## Key Decisions
 
-- CHANGELOG only in English (`CHANGELOG.md`), no multi-language variants
+- Architecture is skill chain + AGENT.md, NOT web app (FastAPI/frontend deferred)
+- Data format: JSON between skills, Markdown for human review
+- CHANGELOG only in English (`CHANGELOG.md`)
 - Every commit must run `/release-skills` to update changelog
 - New skills must use `/skill-creator` and conform to agentskills.io spec
 - MVP platforms: Perplexity + ChatGPT + DeepSeek
+- Two scenarios in parallel: 了解阶段 (industry discovery) + 使用阶段 (usage extraction)
+- Human review checkpoint after question generation, feedback saved to `feedback-rules.md`
+- MVP question count: 30-40 (adjustable)
+- No official doc directory as data source for now
