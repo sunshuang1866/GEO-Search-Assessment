@@ -6,7 +6,7 @@ Session resume file for Claude Code. Read this at the start of every new convers
 
 ## Project Overview
 
-GEO (Generative Engine Optimization) Search Assessment — a system that automatically evaluates how well an open-source community (initially openEuler) is represented across mainstream AI search platforms, then generates actionable improvement suggestions.
+GEO (Generative Engine Optimization) Search Assessment — a system that automatically evaluates how well an open-source community (initially MindSpore) is represented across mainstream AI search platforms, then generates actionable improvement suggestions.
 
 **Core workflow**: Define keywords → Sample AI platforms → Score & diagnose → Output suggestions
 
@@ -68,6 +68,7 @@ Merge → semantic dedup → classify → output `questions.json` + `questions.m
 | 2026-03-10 | Released v0.1.0 |
 | 2026-03-10 | Agreed on total architecture: skill chain + AGENT.md orchestration |
 | 2026-03-10 | Agreed on Step 1 design: 3 paths, human review checkpoint, feedback loop |
+| 2026-03-10 | Changed target community from openEuler to MindSpore, updated all examples and competitors |
 
 ## Key Decisions
 
