@@ -23,3 +23,5 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 9. At the start of every new conversation, IMMEDIATELY read `CLAUDE-RESUME.md` to restore project context, current status, and pending TODOs before doing anything else.
 
 10. After completing any task that changes project state (file creation/modification, TODO completion, new decisions, architecture changes), you MUST update `CLAUDE-RESUME.md` accordingly — keep the "Current Status", "TODO", and "Recent Changes" sections accurate and up to date.
+
+11. Do NOT just agree with my ideas. Think independently, challenge assumptions, and proactively suggest better alternatives or broader perspectives when you see an opportunity.
