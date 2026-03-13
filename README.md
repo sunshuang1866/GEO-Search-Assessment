@@ -2,7 +2,7 @@
 
 GEO（Generative Engine Optimization）搜索能力诊断系统 —— 自动评估开源社区在主流 AI 搜索平台中的表现，并生成可执行的改进建议。
 
-初始目标社区：**MindSpore**。
+初始目标社区：**MindSpore**（AI 计算框架，竞品：TensorFlow / PyTorch / PaddlePaddle）。
 
 ## 系统架构
 
@@ -11,49 +11,32 @@ GEO（Generative Engine Optimization）搜索能力诊断系统 —— 自动评
 4 步流水线，每步对应一个独立 Skill：
 
 ```
-questions.json        responses.json        scores.json        suggestions.json
-     │                     │                     │                     │
-     ▼                     ▼                     ▼                     ▼
-┌──────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────────┐
-│ keyword  │────▶│   platform   │────▶│   scoring    │────▶│   improvement    │
-│ generator│     │   sampler    │     │   engine     │     │   advisor        │
-└──────────┘     └──────────────┘     └──────────────┘     └──────────────────┘
-  生成问题集         采样 AI 平台          评分诊断            生成改进建议
+questions.json        responses.json     scoring-results.json    suggestions.md / issues.md
+     │                     │                     │                        │
+     ▼                     ▼                     ▼                        ▼
+┌──────────────┐  ┌──────────────────┐  ┌──────────────┐  ┌─────────────────────────┐
+│ get-question │─▶│ platform-sampler │─▶│scoring-engine│─▶│   improvement-advisor   │
+└──────────────┘  └──────────────────┘  └──────────────┘  └─────────────────────────┘
+   生成问题集          采样 AI 平台           评分诊断          生成改进建议 & Issue清单
 ```
 
 **数据流**：Skill 之间通过 JSON 文件传递数据，同时输出 Markdown 供人工审阅。
 
+**评估平台（MVP）**：ChatGPT · 豆包（火山引擎）· 千问（阿里云百炼）· DeepSeek
 
-## 快速开始
-
-### 1. 配置 API Token
-
-```bash
-cp .env.example .env
-# 编辑 .env，填入各平台的 API Key
-```
-
-需要配置的平台：Perplexity、OpenAI、DeepSeek、豆包（火山引擎）、通义千问（阿里云百炼）、Kimi（月之暗面）。
-
-### 2. 准备手动问题（可选）
-
-创建 `manual-questions.md`，按 Markdown 格式编写社区相关问题。
-
-### 3. 运行 Skill
-
-在 Claude Code 中按顺序调用各 Skill，每步产出的 JSON 文件作为下一步的输入。
 
 ## 项目文件
 
-| 文件 | 用途 |
-|------|------|
+| 文件/目录 | 用途 |
+|----------|------|
 | `GEO搜索能力诊断-初步设计方案.md` | 完整设计文档 |
 | `INPUT.md` | 原始需求文档 |
 | `.env.example` | API Token 配置模板（6 个平台） |
 | `CLAUDE.md` | Claude Code 开发规则 |
 | `CLAUDE-RESUME.md` | 会话恢复文件，记录项目状态和待办 |
 | `CHANGELOG.md` | 变更日志，由 `/release-skills` 自动维护 |
-| `VERSION` | 当前版本号 |
+| `Answers/` | AI 平台原始回答（Q1–Q10） |
+| `Scoring/` | GEO 综合评分报告（含平台对比、改进建议） |
 
 ## 使用 Claude Code 开发
 
