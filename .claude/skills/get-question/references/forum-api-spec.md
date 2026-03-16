@@ -20,13 +20,21 @@ GET /top.json?page={N}&per_page=50
 
 Returns topics sorted by activity/views across all categories. Pagination: `page=0,1,2...`
 
-### Category Topics
+### Category Topics (Latest)
 
 ```
 GET /c/{slug}/{category_id}.json?page={N}
 ```
 
-Returns latest topics within a specific category.
+Returns latest topics within a specific category (sorted by activity).
+
+### Category Topics (Top by Views) ✅ Preferred for question extraction
+
+```
+GET /c/{slug}/{category_id}/l/top.json?period=all&page={N}
+```
+
+Returns topics sorted by views (all-time). Use `period=all` for global top; `period=yearly` / `period=monthly` for recency. This is the correct endpoint for question discovery — it surfaces the most-viewed threads rather than the newest ones.
 
 ### Categories List
 

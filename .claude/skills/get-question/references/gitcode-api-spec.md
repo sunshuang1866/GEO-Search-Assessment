@@ -67,11 +67,26 @@ URL:   https://gitcode.com/mindspore/mindspore/issues
 
 GitCode API rate limits are not publicly documented. The script fetches 1-3 pages typically (50-150 issues), which should be within limits.
 
+## Token Pre-Validation
+
+Before fetching issues, validate the token with a lightweight call:
+
+```
+GET /user
+Headers: private-token: <GITCODE_TOKEN>
+```
+
+- HTTP `200`: token is valid, proceed
+- HTTP `404` with body `{"error_message": "404, token not found"}`: token is invalid or expired — regenerate at gitcode.com/profile/personal_access_tokens
+- HTTP `401`: token missing or malformed
+
 ## Error Responses
 
 - `400`: Missing `private-token` header
-- `403`: Invalid token or insufficient scopes (needs `read_projects`)
-- `404`: Repository not found
+- `401`: Malformed token
+- `403`: Token lacks required permissions (needs `read_repository` scope)
+- `404` with "token not found": Token is invalid or expired (⚠️ GitCode returns 404, not 403, for bad tokens)
+- `404` with repo path in message: Repository not found
 
 ## Fallback
 

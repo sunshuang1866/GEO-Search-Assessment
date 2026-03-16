@@ -30,7 +30,20 @@ def fetch_json(url: str, token: str) -> dict | list:
             return json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as e:
         body = e.read().decode("utf-8", errors="replace")
-        print(f"HTTP {e.code} fetching {url}: {body}", file=sys.stderr)
+        if e.code == 404 and "token not found" in body.lower():
+            print(
+                f"HTTP 404: GitCode token is invalid or not found. "
+                f"Please regenerate GITCODE_TOKEN at gitcode.com/profile/personal_access_tokens",
+                file=sys.stderr,
+            )
+        elif e.code == 403:
+            print(
+                f"HTTP 403: GitCode token lacks required permissions (needs 'read_repository' scope). "
+                f"Please check token scopes at gitcode.com/profile/personal_access_tokens",
+                file=sys.stderr,
+            )
+        else:
+            print(f"HTTP {e.code} fetching {url}: {body}", file=sys.stderr)
         raise
     except urllib.error.URLError as e:
         print(f"Network error fetching {url}: {e.reason}", file=sys.stderr)
