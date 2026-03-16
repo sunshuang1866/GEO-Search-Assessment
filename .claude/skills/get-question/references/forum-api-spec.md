@@ -1,13 +1,15 @@
-# Forum API Specification
+# Forum API Specification (Discourse)
 
 ## Status: Confirmed ✅
 
-MindSpore community forum at `https://discuss.mindspore.cn` runs **Discourse** and exposes standard Discourse REST API endpoints. No authentication required for public data.
+This spec covers **Discourse**-based community forums. No authentication required for public data.
 
 ## Base URL
 
+Passed via `--api-url` or defaults to the community's known forum URL.
+
 ```
-https://discuss.mindspore.cn
+Example: https://discuss.mindspore.cn
 ```
 
 ## Endpoints
@@ -52,27 +54,38 @@ GET /search.json?q={query}
 
 Full-text search across topics and posts.
 
-## Key Categories
+## Category Taxonomy
 
-| ID | Slug | Name | Topics |
-|----|------|------|--------|
-| 4 | help | 问题求助 Help | 103 |
-| 38 | mindspore-lite | MindSpore Lite推理部署 | 43 |
-| 14 | activities | 活动公告 Activities | 17 |
-| 15 | tech | 经验分享 Tech Blogs | 6 |
-| 2 | feedback | 建议与反馈 Feedback | 2 |
-| 39 | mindspore-transformers | 大模型套件 MindSpore Transformers | 1 |
-| 36 | mindspore-llm-inference-serving | 大模型推理部署 LLM Inference Serving | 1 |
+Discourse forum categories vary by community but typically fall into these functional types:
 
-**Primary sources for question extraction**: `help` (id:4) and `mindspore-lite` (id:38).
+| Type | GEO Value | Examples |
+|---|---|---|
+| **Q&A / Help** | High — real user questions | help, questions, support, 问题求助 |
+| **Sub-project** | High — domain-specific questions | mindspore-lite, plugins, extensions |
+| **Tutorials / Blog** | Medium — how-to content | tech, tutorials, 经验分享 |
+| **Feedback** | Medium — feature requests, pain points | feedback, suggestions, 建议反馈 |
+| **Announcements** | Low — not questions | announcements, events, 活动公告 |
+| **Meta / Uncategorized** | Skip | meta, staff, uncategorized |
+
+### Dynamic Discovery
+
+Fetch the actual category list for any Discourse forum:
+```
+GET {base_url}/categories.json
+```
+The response contains `category_list.categories[]` with `id`, `slug`, `name`, `topic_count`. Use `topic_count` to identify active categories.
+
+### Default Fetch Mode
+
+Global top topics across all categories via `/top.json?period=all`. Use `--category <slug>` to restrict to a specific category when needed.
 
 ## Topic Object Fields
 
 ```json
 {
   "id": 12345,
-  "title": "MindSpore GPU 版本安装报错求助",
-  "slug": "mindspore-gpu",
+  "title": "GPU 版本安装报错求助",
+  "slug": "gpu-install-error",
   "views": 1520,
   "reply_count": 23,
   "like_count": 5,

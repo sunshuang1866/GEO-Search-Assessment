@@ -2,8 +2,8 @@
 """Fetch top issues from a GitCode repository.
 
 Usage:
-    python3 fetch-repo-issues.py --owner mindspore --repo mindspore --limit 50
-    python3 fetch-repo-issues.py --owner mindspore --repo mindspore --limit 50 --state all
+    python3 fetch-repo-issues.py --owner <org> --repo <name> --limit 50
+    python3 fetch-repo-issues.py --owner <org> --repo <name> --limit 50 --state all
 
 Requires GITCODE_TOKEN environment variable or --token flag.
 Output: JSON array of issues to stdout, errors to stderr.
@@ -101,8 +101,8 @@ def normalize_issue(issue: dict) -> dict:
 
 def main():
     parser = argparse.ArgumentParser(description="Fetch issues from GitCode")
-    parser.add_argument("--owner", required=True, help="Repo owner/org (e.g., mindspore)")
-    parser.add_argument("--repo", required=True, help="Repo name (e.g., mindspore)")
+    parser.add_argument("--owner", required=True, help="Repo owner/org")
+    parser.add_argument("--repo", required=True, help="Repo name")
     parser.add_argument("--limit", type=int, default=50, help="Max issues to return")
     parser.add_argument("--state", default="all", choices=["open", "closed", "all"],
                         help="Issue state filter")
