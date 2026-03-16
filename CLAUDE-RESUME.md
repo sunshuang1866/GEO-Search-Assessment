@@ -18,7 +18,7 @@ The system is a **skill chain orchestrated by AGENT.md**, not a web application.
 
 4-step pipeline (execution steps), each step is a separate skill:
 
-1. **get-question** — Generate question set from manual input + 4 auto paths (forum, issue, industry, ai_reverse)
+1. **get-question** — Generate question set from manual input + 3 auto paths (forum, issue, industry)
 2. **platform-sampler** — Call 4 AI platform APIs with questions, collect responses
 3. **scoring-engine** — Two-layer evaluation (content completeness + citation accuracy), generate P0-P2 improvement suggestions
 4. **issue-creator** — Auto-create GitCode Issues from improvement suggestions
@@ -33,8 +33,6 @@ Question sources: manual input + 4 selectable auto-generation paths (`paths` par
 - **Path 1 (PRIMARY): Forum usage question extraction (使用阶段)** — Fetch top topics from MindSpore Discourse forum (`https://discuss.mindspore.cn`) via API. Fetches from 问题求助 Help + MindSpore Lite categories + global top. LLM rewrites titles to search questions, filters pure bugs. Forum + issues are the primary question source.
 - **Path 2 (PRIMARY): Repo issue question extraction (使用阶段)** — Fetch issues from GitCode (`https://gitcode.com/mindspore/mindspore/issues`) via API (`api.gitcode.com/api/v5`). Requires `GITCODE_TOKEN`. Sorted by comments, LLM rewrites to search questions. No LLM fallback — skip if no token.
 - **Path 3: Industry question discovery (了解阶段)** — LLM determines community's domain hierarchy (industry → sub-domain → positioning → competitors), then generates questions by user intent (认知/选型/趋势/场景). Uses competitors for reverse expansion.
-- **Path 4: AI platform reverse extraction (使用阶段)** — Ask multiple AI platforms "what are the most common questions about {community}" and take intersection.
-
 Merge (manual + selected paths) → semantic dedup → classify → output `questions.json` + `questions.md`.
 
 Priority: manual > forum (path1) / issue (path2) > multi-source > single-source.
@@ -89,8 +87,11 @@ Priority: manual > forum (path1) / issue (path2) > multi-source > single-source.
 | improvement-advisor | `.claude/skills/improvement-advisor/` | ✅ Complete |
 
 ### get-question
-- 9-step procedure: Load config → Parse manual → Path 1 (forum) → Path 2 (issue) → Path 3 (industry LLM) → Path 4 (AI reverse) → Merge & dedup → Output → Human review
-- Scripts: `parse-manual-questions.py`, `call-ai-platform.py`, `fetch-forum-posts.py`, `fetch-repo-issues.py`, `validate-questions.py`
+- 8-step procedure: Load config → Parse manual → Path 1 (forum) → Path 2 (issue) → Path 3 (industry LLM) → Merge & dedup → Output → Human review
+- Path 4 (AI reverse extraction) removed — data must come from real sources, not AI self-report
+- Forum: all content types included (technical, events, blogs, announcements) — views are relevance filter, not content type
+- Forum endpoint: `/c/{slug}/{id}/l/top.json?period=all` (views-sorted, not latest activity)
+- Scripts: `parse-manual-questions.py`, `fetch-forum-posts.py`, `fetch-repo-issues.py`, `validate-questions.py`
 - References: `forum-api-spec.md`, `gitcode-api-spec.md`
 - Assets: `questions-template.md`
 
@@ -171,6 +172,11 @@ Priority: manual > forum (path1) / issue (path2) > multi-source > single-source.
 | 2026-03-12 | Added Path 2 (issue): GitCode repo issue extraction via api.gitcode.com (requires GITCODE_TOKEN) |
 | 2026-03-12 | Created fetch-repo-issues.py and references/gitcode-api-spec.md |
 | 2026-03-12 | Now 4 paths: forum, issue, industry, ai_reverse (was 3) |
+| 2026-03-16 | Removed Path 4 (ai_reverse): circular reasoning risk, replaced by real data sources only |
+| 2026-03-16 | Fixed forum fetch endpoint to /l/top.json (views-sorted) instead of latest activity |
+| 2026-03-16 | Removed QUESTION_CATEGORY_IDS filter: all forum content types now included |
+| 2026-03-16 | Added SKILL_DIR variable to SKILL.md Step 1 to fix script path resolution |
+| 2026-03-16 | Added GitCode token pre-validation (curl) before running fetch-repo-issues.py |
 | 2026-03-12 | Scoring design agreed: two-layer (content completeness + citation accuracy), 5 phenomena (A-E) |
 | 2026-03-12 | content_exists = human pre-labeled, citation ratio = source-level, human spot-check 20% |
 | 2026-03-12 | Issue auto-creation = separate skill (issue-creator), not inside scoring-engine |
@@ -192,7 +198,9 @@ Priority: manual > forum (path1) / issue (path2) > multi-source > single-source.
 - MVP platforms (4): ChatGPT + DeepSeek + 豆包 + Qwen（Perplexity 已移除）
 - API tokens stored in `.env`, template in `.env.example`
 - Two scenarios in parallel: 了解阶段 (industry discovery) + 使用阶段 (usage extraction)
-- Forum (Discourse API) is primary question source; all 3 paths selectable via `paths` param
+- Forum (Discourse API) is primary question source; all 3 paths selectable via `paths` param (forum, issue, industry)
+- Path 4 (AI reverse extraction) permanently removed — circular reasoning risk; real data only
+- Forum includes all content types (not filtered by category type); views = relevance signal
 - Forum URL: https://discuss.mindspore.cn/ (Discourse, public API, no auth needed)
 - Human review checkpoint after question generation, feedback saved to `feedback-rules.md`
 - MVP question count: 30-40 (adjustable)

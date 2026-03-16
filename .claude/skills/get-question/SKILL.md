@@ -48,14 +48,15 @@ Generate a comprehensive question set covering two scenarios (了解阶段 + 使
 3. If the script succeeds, prompt the LLM to rewrite forum topics into search questions:
    ```
    The following are real forum post titles from the {community} community, sorted by views (most viewed first).
-   Rewrite them into natural language search questions that a developer might type into an AI assistant.
+   For each post, think about what questions a user might type into an AI assistant about this topic.
+   The scope is broad: technical problems, feature explanations, community events, blog topics, announcements — anything a user might be curious about and ask an AI.
 
    Rules:
-   - SKIP: pure bug report titles that are just error messages with no generalizable intent (e.g., "[ERROR] xxx", "报错求助" with no context).
-   - SKIP: activity posts, blog articles, tutorial series, announcements, and event recaps (e.g., "学习营打卡", "扩散模型系列", "结营公示", "社区活动").
-   - KEEP: installation issues, configuration questions, API usage questions, feature inquiries, migration/conversion questions, deployment how-tos, and troubleshooting with a clear generalizable problem.
-   - Preserve the original intent — do not over-generalize.
-   - For each question, classify the category: installation, configuration, training, deployment, migration, troubleshooting, feature, performance.
+   - For every post, generate at least one natural language question that reflects what someone might ask an AI about this topic.
+   - A post about "结营公示" might yield questions like "MindSpore 学习营获奖名单是什么？" or "怎么参加 MindSpore 学习营？"
+   - A technical blog like "扩散模型系列——DDPM" might yield "DDPM 扩散模型的原理是什么？" or "MindSpore 怎么实现 DDPM？"
+   - Preserve the specificity of the original post — do not over-generalize.
+   - For each question, classify the category: installation, configuration, training, deployment, migration, troubleshooting, feature, performance, event, tutorial, other.
 
    {forum_posts_json}
 

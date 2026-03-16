@@ -47,23 +47,17 @@ def fetch_json(url: str) -> dict:
         raise
 
 
-# Category IDs that contain real questions/issues (not blogs or announcements)
-QUESTION_CATEGORY_IDS = {4, 38, 19, 20, 23}
-
-
 def fetch_top_topics(base_url: str, limit: int) -> list[dict]:
-    """Fetch top topics from /top.json, filtered to question-oriented categories."""
+    """Fetch top topics from /top.json across all categories."""
     topics = []
     page = 0
-    while len(topics) < limit * 3:  # fetch extra to allow for filtering
+    while len(topics) < limit:
         url = f"{base_url}/top.json?period=all&page={page}"
         data = fetch_json(url)
         topic_list = data.get("topic_list", {}).get("topics", [])
         if not topic_list:
             break
-        # Filter to question-oriented categories only
-        filtered = [t for t in topic_list if t.get("category_id") in QUESTION_CATEGORY_IDS]
-        topics.extend(filtered)
+        topics.extend(topic_list)
         page += 1
         if page > 3:  # cap at 3 pages to avoid rate limits
             break
