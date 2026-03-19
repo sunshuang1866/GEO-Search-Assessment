@@ -14,6 +14,15 @@ import sys
 
 VALID_CITATION_TYPES = {"B", "C", "D", "E"}
 REQUIRED_FIELDS = ["citation_type", "official_source_ratio", "accuracy_score", "details"]
+VALID_ISSUE_TAGS = {
+    "no_direct_answer", "buried_answer", "missing_faq", "ambiguous_terminology",
+    "missing_disambiguation", "negation_missed", "negation_reversed", "outdated_info",
+    "version_confusion", "fabricated_claims", "vague_numbers", "no_schema_markup",
+    "poor_structure", "no_tables", "missing_summary", "no_query_variants",
+    "missing_scope", "entity_confusion", "shallow_content", "no_evidence",
+    "no_alternatives", "missing_use_cases", "no_process_doc", "inconsistent_data",
+    "missing_edge_cases", "no_reasoning",
+}
 
 
 def parse_and_validate(raw_json):
@@ -63,12 +72,24 @@ def parse_and_validate(raw_json):
         print("VALIDATION ERRORS:\n" + "\n".join(f"  - {e}" for e in errors), file=sys.stderr)
         sys.exit(1)
 
+    # Validate issues_found
+    issues = data.get("issues_found", [])
+    if not isinstance(issues, list):
+        errors.append(f"issues_found must be an array, got {type(issues).__name__}")
+        issues = []
+    else:
+        invalid_tags = [t for t in issues if t not in VALID_ISSUE_TAGS]
+        if invalid_tags:
+            print(f"WARNING: Unknown issue tags (ignored): {invalid_tags}", file=sys.stderr)
+        issues = [t for t in issues if t in VALID_ISSUE_TAGS]
+
     # Output cleaned data
     output = {
         "citation_type": data["citation_type"],
         "official_source_ratio": data["official_source_ratio"],
         "accuracy_score": data["accuracy_score"],
         "details": data.get("details", ""),
+        "issues_found": issues,
         "sources_identified": data.get("sources_identified", []),
     }
     json.dump(output, sys.stdout, ensure_ascii=False, indent=2)

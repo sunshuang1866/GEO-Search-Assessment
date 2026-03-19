@@ -1,6 +1,8 @@
 # GEO 评分报告
 
 > 生成时间: {scored_at}
+> 标准答案: {has_standard_answers}
+> 官方域名: {official_domains}
 
 ## 一、概览
 
@@ -10,8 +12,15 @@
 | 评估平台数 | {total_platforms} |
 | 评估对数 | {scored_pairs}/{total_pairs} |
 | 平均引用比例 | {avg_ratio:.1%} |
+| 内容源问题数 | {content_origin_count}（≥3 平台出现相同问题） |
 
-## 二、现象分布
+## 二、核心发现
+
+1. {finding_1}
+2. {finding_2}
+3. {finding_3}
+
+## 三、现象分布
 
 | 现象 | 数量 | 占比 | 说明 |
 |------|------|------|------|
@@ -21,7 +30,7 @@
 | D — 引用比例大 | {d_count} | {d_pct:.0%} | 健康，持续监控 |
 | E — 引用比例小 | {e_count} | {e_pct:.0%} | 内容深度优化 |
 
-## 三、严重级别分布
+## 四、严重级别分布
 
 | 级别 | 数量 | 说明 |
 |------|------|------|
@@ -30,29 +39,72 @@
 | P2 | {p2_count} | 低优先级 |
 | 无需行动 | {ok_count} | 持续监控 |
 
-## 四、平台对比
+## 五、平台对比
 
 | 平台 | 平均得分 | 平均引用比例 | 主要现象 |
 |------|---------|-------------|---------|
 {platform_rows}
 
-## 五、改进建议（按优先级）
+## 六、跨平台模式分析
 
-### P0 — 立即行动
+### 幻觉模式
+{hallucination_patterns}
+
+### 消歧义问题
+{disambiguation_patterns}
+
+### 否定传递失败
+{negation_failures}
+
+### 引用盲区
+{citation_gaps}
+
+### 内容源问题（≥3 平台）
+{content_origin_issues}
+
+## 七、改进建议（按优先级）
+
+> 建议来源：[GEO 优化建议目录](references/geo-suggestions-catalog.md)（72 条标准化建议）。
+> 每条建议标注了关联的目录编号（catalog_refs），可查阅目录获取通用操作指南。
+
+### P0 — 立即行动（1-2 周内完成）
 
 {p0_suggestions}
 
-### P1 — 计划改进
+### P1 — 计划改进（2-4 周内完成）
 
 {p1_suggestions}
 
-### P2 — 低优先级
+### P2 — 低优先级（持续优化）
 
 {p2_suggestions}
 
-## 六、逐题详情
+## 八、逐题详情
 
 {question_details}
+
+## 九、执行路线图
+
+### 阶段一：紧急修复（1-2 周）— P0 项目
+- [ ] {p0_item_1}
+- [ ] {p0_item_2}
+
+### 阶段二：短期改进（2-4 周）— P1 项目
+- [ ] {p1_item_1}
+- [ ] {p1_item_2}
+
+### 阶段三：持续优化（长期）— P2 项目
+- [ ] {p2_item_1}
+
+## 十、KPI 跟踪
+
+| 指标 | 定义 | 当前 | 目标 |
+|------|------|------|------|
+| 官方引用率 | 回答中引用官方源的比例 | {current_citation_rate}% | ≥60% |
+| 事实准确率 | 回答与标准答案匹配的比例 | {current_accuracy_rate}% | ≥80% |
+| 否定传递率 | 限制性信息被正确传递的比例 | {current_negation_rate}% | ≥70% |
+| 上下文正确率 | 术语在正确产品语境下使用的比例 | {current_context_rate}% | ≥90% |
+| 版本新鲜度 | 引用最新稳定版的比例 | {current_freshness_rate}% | ≥70% |
 
 ---
 

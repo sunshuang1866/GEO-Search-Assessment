@@ -1,6 +1,6 @@
 # Suggestion Rules
 
-Rules for assigning categories and generating suggestion text based on phenomena type.
+基于现象分类和回答内容分析，从 `geo-suggestions-catalog.md` 中匹配适用的优化建议。
 
 ## Category Assignment
 
@@ -12,45 +12,79 @@ Rules for assigning categories and generating suggestion text based on phenomena
 | D | — | 无需行动（或 `monitoring` 如有小瑕疵） |
 | E | `optimization` | 引用比例不足 |
 
-## Suggestion Text Templates
+## 建议生成流程
 
-### Phenomenon A — Content Gap
+### 第一步：确定现象类型
 
-```
-【P0 内容缺口】问题「{question}」在官方渠道无对应内容。
-建议：在官网/文档中补充此问题的完整解答。
-优先级：P0（内容缺失是 AI 无法引用的根本原因）。
+根据 Layer 2 评分结果中的 `citation_type` 确定现象（A/B/C/D/E）。
+
+### 第二步：获取候选建议列表
+
+查阅 `references/geo-suggestions-catalog.md` 顶部的「现象→建议映射表」，获取该现象对应的所有候选建议 ID。
+
+### 第三步：根据 issues_found 精准匹配
+
+根据评分输出中的 `issues_found` 字段（具体内容问题标签），从候选列表中筛选最相关的建议。匹配规则：
+
+| issue 标签 | 优先匹配的建议 ID |
+|-----------|-----------------|
+| `no_direct_answer` | CTX-02 |
+| `buried_answer` | CTX-02, ORG-02 |
+| `missing_faq` | CTX-09, ORG-05 |
+| `ambiguous_terminology` | DIS-01, DIS-02, DIS-03, CTX-04 |
+| `missing_disambiguation` | DIS-03, DIS-04 |
+| `negation_missed` | NEG-01, NEG-02, NEG-03, NEG-04, NEG-05 |
+| `negation_reversed` | NEG-01, NEG-02, NEG-04 |
+| `outdated_info` | REF-06, VER-01, VER-02, VER-03 |
+| `version_confusion` | VER-01, VER-02, VER-03, CTX-05 |
+| `fabricated_claims` | REF-04, REF-10, NEG-03, DIS-03 |
+| `vague_numbers` | REF-01, EXP-08 |
+| `no_schema_markup` | ORG-05 |
+| `poor_structure` | ORG-01, ORG-06, ORG-04 |
+| `no_tables` | ORG-03 |
+| `missing_summary` | ORG-02 |
+| `no_query_variants` | CTX-03, KWD-01, KWD-02 |
+| `missing_scope` | CTX-05, EXP-10 |
+| `entity_confusion` | REF-07, DIS-01, DIS-02 |
+| `shallow_content` | EXC-08, EXC-06, REF-02, REF-03 |
+| `no_evidence` | REF-04, REF-05, EXC-01, EXC-03 |
+| `no_alternatives` | NEG-04, CTX-08 |
+| `crawl_blocked` | SITE-01, SITE-03 |
+| `spa_blank_page` | SITE-03 |
+| `missing_use_cases` | CTX-08, EXC-07 |
+| `no_process_doc` | EXP-03, REF-05 |
+| `inconsistent_data` | REF-10, EPT-03 |
+| `missing_edge_cases` | EPT-06, CTX-05 |
+| `no_reasoning` | EPT-08, REF-04 |
+
+### 第四步：生成建议对象
+
+对于每个匹配的建议，生成结构化建议对象：
+
+```json
+{
+  "suggestion_id": "s_001",
+  "question_id": "q_001",
+  "question": "...",
+  "platform": "ChatGPT",
+  "citation_type": "B",
+  "official_source_ratio": 0.2,
+  "accuracy_score": 4,
+  "severity": "P1",
+  "category": "seo",
+  "catalog_refs": ["CTX-02", "ORG-05", "DIS-01"],
+  "suggestion_text": "结合 catalog 中建议的具体操作，针对该问题和页面的实际情况，生成可执行的改进建议",
+  "details": "..."
+}
 ```
 
-### Phenomenon B — Not Cited
+**关键规则**：`suggestion_text` 不是照搬 catalog 原文，而是将 catalog 中的通用操作指南结合该问题的具体上下文（问题内容、平台回答、官方页面现状）转化为具体的、可执行的改进措施。
 
-```
-【{severity} 可检索性不足】问题「{question}」官方有内容但 {platform} 未引用。
-官方源引用比例: {ratio:.0%}。
-建议：优化官方页面的 SEO 结构（标题、meta description、结构化数据），提升 AI 平台抓取优先级。
-可参考官方页面: {official_urls}。
-```
+### 第五步：建议数量控制
 
-### Phenomenon C — Wrong Citation
-
-```
-【P0 引用错误】问题「{question}」在 {platform} 的回答引用了官方源但信息不准确。
-具体问题: {details}。
-建议：
-1. 核查并更新官方页面中的相关信息，确保准确性。
-2. 如为过时信息，在页面显著位置标注版本适用范围。
-3. 考虑添加 structured data 标注内容更新日期。
-```
-
-### Phenomenon E — Low Ratio
-
-```
-【{severity} 引用比例低】问题「{question}」在 {platform} 的回答中官方源占比仅 {ratio:.0%}。
-建议：
-1. 丰富官方内容深度，覆盖更多子话题。
-2. 增加内部交叉链接，提升官方内容权威性信号。
-3. 确保官方页面内容比第三方源更全面、更新。
-```
+- 每个 (question, platform) 对最多生成 5 条建议（选最相关的）。
+- 多平台出现相同问题时，合并为一条建议，`platform` 字段列出所有受影响平台。
+- Phenomenon D（无需行动）不生成建议，除非 accuracy_score < 8。
 
 ## Severity Override Rules
 

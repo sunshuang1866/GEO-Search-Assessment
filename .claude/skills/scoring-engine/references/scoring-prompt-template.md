@@ -37,6 +37,33 @@ Use this template to construct the LLM evaluation prompt for each (question, pla
    - 5-6: 部分引用官方源，或信息有遗漏
    - 3-4: 很少引用官方源，主要依赖第三方信息
    - 1-2: 未引用官方源，或引用了错误信息
+6. **识别内容问题**: 从以下标签中选出所有适用的内容问题（用于后续匹配优化建议）:
+   - `no_direct_answer` — 回答未在开头直接给出答案
+   - `buried_answer` — 核心答案被埋在大量背景信息中
+   - `missing_faq` — 缺少常见追问的覆盖
+   - `ambiguous_terminology` — 术语使用模糊，可能与其他产品/概念混淆
+   - `missing_disambiguation` — 缺少消歧义声明
+   - `negation_missed` — 限制/不支持信息被遗漏
+   - `negation_reversed` — 限制信息被反转（不支持说成支持）
+   - `outdated_info` — 引用了过时的版本信息
+   - `version_confusion` — 混淆了不同版本的特性
+   - `fabricated_claims` — 包含虚构的功能、API 或特性声明
+   - `vague_numbers` — 使用模糊数字（"很快""很多"）而非精确数据
+   - `no_schema_markup` — 官方页面缺少结构化标记（通过回答质量推断）
+   - `poor_structure` — 回答反映出官方内容组织结构不佳
+   - `no_tables` — 本应用表格呈现的对比/参数信息以文本呈现
+   - `missing_summary` — 缺少要点摘要
+   - `no_query_variants` — 仅覆盖单一提问方式
+   - `missing_scope` — 未说明适用范围/版本/条件
+   - `entity_confusion` — 将本产品与其他产品混淆
+   - `shallow_content` — 内容浅显，缺乏深度
+   - `no_evidence` — 声明缺少证据支撑
+   - `no_alternatives` — 提到限制但未给出替代方案
+   - `missing_use_cases` — 缺少使用场景/决策框架
+   - `no_process_doc` — 缺少完整的操作过程记录
+   - `inconsistent_data` — 数据自相矛盾
+   - `missing_edge_cases` — 未讨论边界条件或例外情况
+   - `no_reasoning` — 推荐方案但未解释选择原因
 
 ## 输出格式
 
@@ -47,6 +74,7 @@ Use this template to construct the LLM evaluation prompt for each (question, pla
   "official_source_ratio": 0.0-1.0,
   "accuracy_score": 1-10,
   "details": "一句话说明判定理由",
+  "issues_found": ["issue标签1", "issue标签2"],
   "sources_identified": [
     {"url_or_name": "来源名称或URL", "type": "official|third-party"}
   ]
