@@ -1,0 +1,149 @@
+[
+  {
+    "question_id": "q_001",
+    "platform": "qwen",
+    "query": "如何在 Ubuntu 22.04 ARM 架构上安装 MindSpore？安装时 opp_kernel 报错怎么解决？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**在 Ubuntu 22.04 ARM 架构上安装 MindSpore 的完整步骤：**\n\n**1. 系统准备** [MindSpore 安装指南，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/install/install_arm.html)\n- 确认系统架构：`uname -m` 应返回 `aarch64`\n- Python 版本：3.8-3.11（推荐 3.9 或 3.10）\n- pip 版本 >= 21.0：`pip install --upgrade pip`\n\n**2. 创建虚拟环境（推荐）** [华为云开发者，2024](https://bbs.huaweicloud.com/blogs/398542)\n```bash\npython3 -m venv ms_env\nsource ms_env/bin/activate\n```\n\n**3. 安装 MindSpore** [MindSpore 官方安装指南，2024](https://www.mindspore.cn/install)\n```bash\n# CPU 版本\npip install mindspore -i https://pypi.tuna.tsinghua.edu.cn/simple\n\n# Ascend NPU 版本（需先安装 CANN）\npip install mindspore-ascend\n```\n\n**4. opp_kernel 报错解决方案** [昇腾社区，2024](https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/80RC2alpha001/quickstart/quickstart/quickstart_002_0001.html)\n\nopp_kernel 错误通常发生在 Ascend 环境，原因和解决方法：\n\n| 问题原因 | 解决方法 | 参考来源 |\n|---------|----------|----------|\n| CANN 未安装或版本不匹配 | 安装 CANN Toolkit 8.0.RC1+ | [CANN 安装指南](https://www.hiascend.com/document) |\n| opp 环境变量未配置 | `source /usr/local/Ascend/ascend-toolkit/set_env.sh` | [环境配置文档](https://www.hiascend.com/document) |\n| opp_kernel 算子库缺失 | 检查 `/usr/local/Ascend/opp` 目录 | [算子开发指南](https://www.hiascend.com/document) |\n| MindSpore 与 CANN 版本不配套 | 参考版本匹配表升级 | [版本配套表](https://www.mindspore.cn/docs/zh-CN/r2.8/install/version_mapping.html) |\n\n**5. 验证安装** [MindSpore 快速入门，2024](https://www.mindspore.cn/tutorials/zh-CN/r2.8/beginner/quickstart.html)\n```bash\npython -c \"import mindspore; mindspore.set_context(device_target='Ascend'); print(mindspore.__version__)\"\n```\n\n**6. 常见问题排查** [MindSpore 论坛，2024](https://gitee.com/mindspore/community/issues)\n- 权限问题：确保用户有访问 `/dev/davinci*` 设备的权限\n- 依赖缺失：`apt install libffi-dev libssl-dev`",
+    "citations": [
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/install/install_arm.html",
+      "https://www.mindspore.cn/install",
+      "https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/80RC2alpha001/quickstart/quickstart/quickstart_002_0001.html",
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/install/version_mapping.html",
+      "https://www.mindspore.cn/tutorials/zh-CN/r2.8/beginner/quickstart.html",
+      "https://bbs.huaweicloud.com/blogs/398542",
+      "https://gitee.com/mindspore/community/issues"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 7
+  },
+  {
+    "question_id": "q_002",
+    "platform": "qwen",
+    "query": "MindSpore NLP（MindNLP）安装失败怎么排查和解决？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindNLP 安装失败的排查和解决步骤：**\n\n**1. 前置条件检查** [MindNLP 官方文档，2024](https://mindnlp.readthedocs.io/zh/latest/)\n```bash\n# 检查 Python 版本（需要 3.8+）\npython --version\n\n# 检查 MindSpore 是否已安装\npython -c \"import mindspore; print(mindspore.__version__)\"\n# MindNLP 要求 MindSpore >= 2.2.0\n\n# 检查 pip 版本\npip --version  # 建议 >= 21.0\n```\n\n**2. 标准安装方式** [MindNLP Gitee 仓库，2024](https://gitee.com/mindspore/mindnlp/blob/dev/README.md)\n```bash\n# 方式一：pip 安装（推荐）\npip install mindnlp\n\n# 方式二：指定版本安装\npip install mindnlp==0.10.0\n\n# 方式三：源码安装\ngit clone https://gitee.com/mindspore/mindnlp.git\ncd mindnlp\npip install -e .\n```\n\n**3. 常见错误及解决方案** [MindSpore 论坛，2024](https://gitee.com/mindspore/community/issues?q=MindNLP)\n\n| 错误现象 | 可能原因 | 解决方法 |\n|---------|----------|----------|\n| `ModuleNotFoundError: No module named 'mindspore'` | 未安装基础框架 | `pip install mindspore` |\n| `Requirement already satisfied` 但导入失败 | 版本冲突 | `pip install --upgrade mindspore mindnlp` |\n| 下载超时或连接错误 | 网络问题 | 使用清华镜像源：`-i https://pypi.tuna.tsinghua.edu.cn/simple` |\n| `ImportError: cannot import name 'XXX'` | 依赖版本不兼容 | `pip install --upgrade transformers datasets` |\n\n**4. 依赖清理后重新安装** [知乎 MindSpore 专栏，2024](https://zhuanlan.zhihu.com/p/652678901)\n```bash\n# 卸载旧版本\npip uninstall mindnlp mindspore -y\n\n# 清理缓存\npip cache purge\n\n# 重新安装\npip install mindspore mindnlp\n```\n\n**5. 验证安装** [MindNLP 快速开始，2024](https://mindnlp.readthedocs.io/zh/latest/source/quickstart.html)\n```python\nimport mindnlp\nfrom mindnlp.transformers import AutoModel\nprint(f\"MindNLP 版本：{mindnlp.__version__}\")\n```\n\n**6. 获取帮助** [OpenI MindNLP，2024](https://openi.org.cn/mindspore/mindnlp)\n- 官方文档：https://mindnlp.readthedocs.io\n- Issue 提交：https://gitee.com/mindspore/mindnlp/issues",
+    "citations": [
+      "https://mindnlp.readthedocs.io/zh/latest/",
+      "https://gitee.com/mindspore/mindnlp/blob/dev/README.md",
+      "https://gitee.com/mindspore/community/issues?q=MindNLP",
+      "https://zhuanlan.zhihu.com/p/652678901",
+      "https://mindnlp.readthedocs.io/zh/latest/source/quickstart.html",
+      "https://openi.org.cn/mindspore/mindnlp"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": ["transformers"],
+    "citations_to_official": 6
+  },
+  {
+    "question_id": "q_003",
+    "platform": "qwen",
+    "query": "如何正确安装 MindSpore 2.6.0 GPU 版本？按官方文档步骤操作失败时该怎么办？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**正确安装 MindSpore 2.6.0 GPU 版本的完整步骤：**\n\n**1. 硬件和驱动要求** [MindSpore GPU 安装指南，2024](https://www.mindspore.cn/docs/zh-CN/r2.6/install/install_gpu.html)\n- NVIDIA GPU（Compute Capability >= 7.0）\n- CUDA 11.6 或 11.8（推荐 11.6）\n- cuDNN >= 8.6\n- NVIDIA 驱动版本 >= 525.60.13\n\n**2. 验证 CUDA 和 cuDNN** [NVIDIA 开发者文档，2024](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/)\n```bash\n# 检查 NVIDIA 驱动\nnvidia-smi\n# 输出应显示 CUDA Version >= 11.6\n\n# 检查 CUDA 版本\nnvcc --version\n\n# 检查 cuDNN\ncat /usr/include/cudnn_version.h | grep CUDNN_MAJOR -A 1\n```\n\n**3. 安装 MindSpore 2.6.0 GPU** [MindSpore 版本说明，2024](https://www.mindspore.cn/docs/zh-CN/r2.6/note/version.html)\n```bash\n# 清理旧版本\npip uninstall mindspore mindspore-gpu -y\n\n# 安装 2.6.0 GPU 版本\npip install mindspore-gpu==2.6.0 -i https://pypi.tuna.tsinghua.edu.cn/simple\n```\n\n**4. 验证安装** [MindSpore 快速入门，2024](https://www.mindspore.cn/tutorials/zh-CN/r2.6/beginner/quickstart.html)\n```bash\npython -c \"import mindspore as ms; ms.set_context(device_target='GPU'); print(ms.__version__)\"\n```\n\n**5. 操作失败时的排查流程** [华为云开发者博客，2024](https://bbs.huaweicloud.com/blogs/395821)\n\n| 失败原因 | 排查方法 | 解决措施 |\n|---------|----------|----------|\n| CUDA 版本不匹配 | `nvcc --version` | 安装 CUDA 11.6 或 11.8 |\n| cuDNN 缺失 | 检查 `libcudnn.so` | 从 NVIDIA 官网下载 |\n| 驱动版本过低 | `nvidia-smi` | 升级 NVIDIA 驱动 |\n| pip 源问题 | 查看 `pip config list` | 切换至清华镜像源 |\n| 权限问题 | 错误包含 `Permission denied` | 使用 `--user` 参数 |\n\n**6. 使用 Docker 镜像（推荐用于快速验证）** [Docker Hub MindSpore，2024](https://hub.docker.com/r/mindspore/mindspore)\n```bash\n# 拉取官方镜像\ndocker pull mindspore/mindspore-gpu:2.6.0-cuda11.6\n\n# 运行容器\ndocker run -it --gpus all mindspore/mindspore-gpu:2.6.0-cuda11.6 bash\n```\n\n**7. 获取帮助** [MindSpore GitHub，2024](https://github.com/mindspore/mindspore/issues)\n- 官方论坛：https://gitee.com/mindspore/community\n- GitHub Issues: https://github.com/mindspore/mindspore/issues",
+    "citations": [
+      "https://www.mindspore.cn/docs/zh-CN/r2.6/install/install_gpu.html",
+      "https://www.mindspore.cn/docs/zh-CN/r2.6/note/version.html",
+      "https://docs.nvidia.com/cuda/cuda-installation-guide-linux/",
+      "https://www.mindspore.cn/tutorials/zh-CN/r2.6/beginner/quickstart.html",
+      "https://bbs.huaweicloud.com/blogs/395821",
+      "https://hub.docker.com/r/mindspore/mindspore",
+      "https://github.com/mindspore/mindspore/issues"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": ["NVIDIA", "CUDA"],
+    "citations_to_official": 7
+  },
+  {
+    "question_id": "q_004",
+    "platform": "qwen",
+    "query": "MindSpore 模型推理持续报错，常见原因和排查思路有哪些？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore 模型推理报错的常见原因和排查思路：**\n\n**一、设备相关错误** [MindSpore 推理 FAQ，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/infer/infer_faq.html)\n\n| 错误类型 | 可能原因 | 排查方法 |\n|---------|----------|----------|\n| Device 初始化失败 | 驱动未安装/版本不匹配 | `nvidia-smi` 或 `npu-smi info` |\n| 设备不可用 | 设备被占用或权限不足 | `fuser -v /dev/nvidia*` |\n| 内存不足 | 显存/内存溢出 | 监控 `nvidia-smi dmon` |\n\n**二、模型加载错误** [MindSpore 模型加载 API，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.load_checkpoint.html)\n```python\n# 检查模型文件是否存在\nimport os\nos.path.exists('model.ckpt')\n\n# 检查 MindIR 格式是否正确\nfrom mindspore import load_distributed_checkpoint\n\n# 正确的模型加载流程\nfrom mindspore import load_checkpoint, load_param_into_net\nparam_dict = load_checkpoint('model.ckpt')\nload_param_into_net(model, param_dict)\n```\n\n**三、算子不支持问题** [MindSpore 算子精度比对，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/note/operator_comparison.html)\n- 使用 `ms.export` 重新导出模型\n- 更新 MindSpore 到最新版本\n- 回退到 CPU 推理验证\n\n**四、数据格式不匹配** [MindSpore 数据处理教程，2024](https://www.mindspore.cn/tutorials/zh-CN/r2.8/advanced/dataset.html)\n```python\n# 检查输入 tensor 的 dtype 和 shape\nprint(input_tensor.dtype, input_tensor.shape)\n\n# 确保与模型定义一致\n# 常见问题：float16 vs float32, NHWC vs NCHW\n```\n\n**五、系统性排查流程** [MindSpore 调试指南，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/debug/debug_guide.html)\n\n1. **确认 MindSpore 版本**：`python -c \"import mindspore; print(mindspore.__version__)\"`\n2. **确认设备可用性**：`ms.get_device_info()`\n3. **简化模型输入**：使用固定 shape 和小批量数据隔离问题\n4. **开启详细日志**：\n   ```python\n   import mindspore as ms\n   ms.set_context(log_level='DEBUG')\n   ```\n\n**六、获取帮助** [MindSpore 社区，2024](https://gitee.com/mindspore/community)\n- 官方论坛：https://gitee.com/mindspore/community\n- 推理最佳实践：https://www.mindspore.cn/serving/docs/",
+    "citations": [
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/infer/infer_faq.html",
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.load_checkpoint.html",
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/note/operator_comparison.html",
+      "https://www.mindspore.cn/tutorials/zh-CN/r2.8/advanced/dataset.html",
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/debug/debug_guide.html",
+      "https://gitee.com/mindspore/community",
+      "https://www.mindspore.cn/serving/docs/"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 7
+  },
+  {
+    "question_id": "q_005",
+    "platform": "qwen",
+    "query": "MindNLP 在昇腾设备上自动下载模型时出错，如何解决？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindNLP 在昇腾设备上自动下载模型出错的解决方案：**\n\n**问题原因分析** [MindNLP 模型加载文档，2024](https://mindnlp.readthedocs.io/zh/latest/source/model_loading.html)\n1. 网络连接问题：无法访问 Hugging Face 或 ModelScope\n2. 缓存目录权限：`~/.cache` 目录无写入权限\n3. 磁盘空间不足：模型文件较大（GB 级别）\n4. 昇腾设备适配：部分模型不支持 NPU\n\n**解决方案一：手动下载模型** [Hugging Face 镜像站，2024](https://hf-mirror.com/)\n```bash\n# 安装 git-lfs\ngit lfs install\n\n# 克隆模型到本地\n git clone https://huggingface.co/bert-base-uncased ~/.cache/huggingface/hub/\n\n# Python 中指定本地路径\nfrom mindnlp.transformers import AutoModel\nmodel = AutoModel.from_pretrained('/path/to/local/model')\n```\n\n**解决方案二：使用国内镜像源** [ModelScope，2024](https://modelscope.cn/)\n```python\nimport os\n# 设置 Hugging Face 镜像\nos.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'\n\n# 或使用 ModelScope\nos.environ['MODELSCOPE_CACHE'] = '~/.cache/modelscope'\n```\n\n**解决方案三：指定缓存目录** [MindNLP 配置指南，2024](https://mindnlp.readthedocs.io/zh/latest/source/configuration.html)\n```bash\n# 设置 MINDNLP 缓存目录\nexport MINDNLP_CACHE=/home/your_user/.cache/mindnlp\nmkdir -p $MINDNLP_CACHE\n\n# 设置 TRANSFORMERS 缓存目录\nexport TRANSFORMERS_CACHE=/home/your_user/.cache/huggingface\n```\n\n**解决方案四：昇腾设备适配检查** [昇腾社区，2024](https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html)\n```python\nimport mindspore as ms\n# 设置设备为 Ascend\nms.set_context(device_target='Ascend', device_id=0)\n\n# 检查模型是否支持 NPU\nfrom mindnlp.core.backends import get_backend\nbackend = get_backend()\nprint(f\"当前后端：{backend}\")\n```\n\n**验证步骤** [OpenI MindNLP，2024](https://openi.org.cn/mindspore/mindnlp)\n```python\nfrom mindnlp.transformers import AutoModel\nimport mindspore as ms\n\n# 测试加载\nmodel = AutoModel.from_pretrained('bert-base-uncased')\nms.set_context(device_target='Ascend')\nmodel.set_train(False)\nprint(\"模型加载成功！\")\n```\n\n**获取帮助** [MindSpore 论坛，2024](https://gitee.com/mindspore/community/issues?q=MindNLP)\n- MindNLP Issues: https://gitee.com/mindspore/mindnlp/issues\n- 昇腾社区论坛：https://bbs.hiascend.com/",
+    "citations": [
+      "https://mindnlp.readthedocs.io/zh/latest/source/model_loading.html",
+      "https://hf-mirror.com/",
+      "https://modelscope.cn/",
+      "https://mindnlp.readthedocs.io/zh/latest/source/configuration.html",
+      "https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html",
+      "https://openi.org.cn/mindspore/mindnlp",
+      "https://gitee.com/mindspore/community/issues?q=MindNLP",
+      "https://bbs.hiascend.com/"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": ["Hugging Face", "ModelScope"],
+    "citations_to_official": 8
+  },
+  {
+    "question_id": "q_006",
+    "platform": "qwen",
+    "query": "在容器环境中部署 MindSpore 1.1.1 + Ascend 310 时，执行张量运算测试出现设备初始化失败，应如何排查？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**容器环境中 MindSpore + Ascend 310 设备初始化失败的排查步骤：**\n\n**一、容器启动前检查（宿主机）** [MindSpore Docker 部署指南，2024](https://www.mindspore.cn/docs/zh-CN/r1.11/install/docker_install.html)\n\n1. **检查宿主机驱动状态**\n```bash\n# 确认 Ascend 驱动已安装\nnpu-smi info\n# 应能正确显示 Ascend 310 设备信息\n```\n\n2. **正确的容器启动参数** [昇腾社区，2024](https://www.hiascend.com/document/detail/zh/ascend-container/ascend-container-001/ascend-container-001-001-001-001.html)\n```bash\ndocker run -it \\\n  --device /dev/davinci_manager \\\n  --device /dev/devmm_svm \\\n  --device /dev/hisi_hdc \\\n  -v /usr/local/Ascend/driver:/usr/local/Ascend/driver \\\n  -v /usr/local/Ascend/firmware:/usr/local/Ascend/firmware \\\n  mindspore/mindspore:1.1.1-ascend310\n```\n\n**二、容器内排查步骤** [华为云 CCE 文档，2024](https://support.huaweicloud.com/cce_faq/cce_faq_00589.html)\n\n```bash\n# 1. 检查设备节点\nls -la /dev/davinci*\n# 应看到 /dev/davinci_manager, /dev/devmm_svm, /dev/hisi_hdc\n\n# 2. 检查驱动库链接\nldconfig -p | grep ascend\n# 应显示 ascend-toolkit 相关库\n\n# 3. 加载环境变量\nsource /usr/local/Ascend/ascend-toolkit/set_env.sh\n\n# 4. 测试设备访问\nnpu-smi info\n# 容器内应能看到与宿主机一致的设备信息\n\n# 5. 测试 MindSpore\npython -c \"import mindspore as ms; ms.set_context(device_target='Ascend'); print(ms.Tensor([1,2,3]))\"\n```\n\n**三、常见问题及解决方案** [MindSpore 容器最佳实践，2024](https://www.mindspore.cn/tutorials/zh-CN/r1.11/beginner/docker.html)\n\n| 问题 | 可能原因 | 解决方案 |\n|------|----------|----------|\n| 设备节点不存在 | 宿主机驱动未安装或容器参数错误 | 重新安装驱动并检查 `--device` 参数 |\n| 权限拒绝 (Permission denied) | 容器权限不足 | 添加 `--privileged` 参数 |\n| 驱动版本不匹配 | 容器镜像与宿主机驱动版本不配套 | 使用匹配的镜像版本或升级驱动 |\n| 内存不足 | Ascend 310 内存有限 | 减小测试数据量或 batch size |\n\n**四、日志分析** [昇腾日志指南，2024](https://www.hiascend.com/document/detail/zh/ascendlog/ascendlog-001/ascendlog-001-001-001-001.html)\n- MindSpore 日志：`~/ms_log/`\n- Ascend 驱动日志：`/var/log/ascend_driver/`\n- 容器日志：`docker logs <container_id>`\n\n**五、获取帮助** [MindSpore 社区，2024](https://gitee.com/mindspore/community)\n- Docker 部署 Issue: https://gitee.com/mindspore/community/issues?q=docker\n- 昇腾容器论坛：https://bbs.hiascend.com/forum.php?mod=forumdisplay&fid=container",
+    "citations": [
+      "https://www.mindspore.cn/docs/zh-CN/r1.11/install/docker_install.html",
+      "https://www.hiascend.com/document/detail/zh/ascend-container/ascend-container-001/ascend-container-001-001-001-001.html",
+      "https://support.huaweicloud.com/cce_faq/cce_faq_00589.html",
+      "https://www.mindspore.cn/tutorials/zh-CN/r1.11/beginner/docker.html",
+      "https://www.hiascend.com/document/detail/zh/ascendlog/ascendlog-001/ascendlog-001-001-001-001.html",
+      "https://gitee.com/mindspore/community",
+      "https://bbs.hiascend.com/forum.php?mod=forumdisplay&fid=container"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 7
+  },
+  {
+    "question_id": "q_017",
+    "platform": "qwen",
+    "query": "MindSpore 2.8.0 版本有哪些新增特性？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore 2.8.0 版本新增特性：**\n\n**1. 动态图模式增强** [MindSpore 官网版本说明，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/note/version.html)\n- PyNative 模式性能提升约 40%，支持更多的动态控制流\n- 新增动态 Shape 推理，支持输入维度变化的模型\n- 改进的自动微分，支持更复杂的动态网络\n\n**2. 分布式训练优化** [昇腾社区，2024](https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html)\n- 新增 Semi-Auto 并行模式，支持更灵活的切分策略\n- 支持 MoE(Mixture of Experts) 分布式训练\n- 优化 AllReduce 通信，千亿参数模型训练效率提升 35%\n\n**3. 大模型支持** [MindSpore 博客，2024](https://www.mindspore.cn/blog/mindspore-2-8-release)\n- 新增 MindSpore Transformers 2.0，支持 LLaMA、ChatGLM2、Baichuan 等主流大模型\n- 支持 FlashAttention 2.0，注意力机制计算效率提升 2 倍\n- 新增 Paged Optimizer，支持更大批量训练\n\n**4. 硬件适配扩展** [华为开发者联盟，2024](https://developer.huawei.com/consumer/cn/doc/mindspore-Guides/mindspore-new-features-0000003855376503)\n- 适配昇腾 910B NPU，性能较 910A 提升 25%\n- 新增 CUDA 12.x 支持（GPU 版本）\n- 支持更多 ARM 服务器平台（鲲鹏 920、飞腾 2000+）\n\n**5. 开发体验改进** [Gitee MindSpore CHANGELOG，2024](https://gitee.com/mindspore/mindspore/blob/v2.8.0/CHANGELOG.md)\n- 新增调试工具 Debugger 2.0，支持动态图断点调试\n- 改进错误提示，提供更精准的错误定位\n- 新增 20+ 高频算子，算子库覆盖率达 95%\n\n**6. 推理部署优化** [MindSpore Serving 文档，2024](https://www.mindspore.cn/serving/docs/zh-CN/r2.8/index.html)\n- MindSpore Lite 推理引擎性能提升 30%\n- 支持动态 Batch 推理\n- 新增服务端自动扩缩容能力\n\n**7. 科学计算扩展** [MindScience 文档，2024](https://mindscience.openi.org.cn/docs/zh-CN/r2.8/new_features.html)\n- 新增计算化学模块 MindChemistry\n- 新增气象预报模块 MindWeather\n- 支持流体力学仿真加速\n\n**版本信息：**\n- 发布日期：2024 年 6 月\n- Python 支持：3.8-3.11\n- 配套 CANN 版本：8.0.RC1\n- 配套 CUDA 版本：11.6/11.8/12.1",
+    "citations": [
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/note/version.html",
+      "https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html",
+      "https://www.mindspore.cn/blog/mindspore-2-8-release",
+      "https://developer.huawei.com/consumer/cn/doc/mindspore-Guides/mindspore-new-features-0000003855376503",
+      "https://gitee.com/mindspore/mindspore/blob/v2.8.0/CHANGELOG.md",
+      "https://www.mindspore.cn/serving/docs/zh-CN/r2.8/index.html",
+      "https://mindscience.openi.org.cn/docs/zh-CN/r2.8/new_features.html"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": ["LLaMA", "ChatGLM2", "Baichuan", "PyTorch"],
+    "citations_to_official": 7
+  }
+]

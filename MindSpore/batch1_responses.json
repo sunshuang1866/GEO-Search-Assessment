@@ -1,0 +1,199 @@
+[
+  {
+    "question_id": "q_007",
+    "platform": "qwen",
+    "query": "如何使用 vLLM 框架部署 MindSpore 模型并实现流式异步推理服务？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**使用 vLLM 框架部署 MindSpore 模型并实现流式异步推理服务：**\n\n**1. 环境准备** [MindSpore Serving 文档，2024](https://www.mindspore.cn/serving/docs/zh-CN/r2.8/index.html)\n- MindSpore 2.2+ 或 MindSpore Lite 2.8+\n- Python 3.8-3.11\n- vLLM 0.2.0+（需安装 mindspore 后端支持）\n\n**2. 模型导出** [MindSpore 模型导出指南，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.export_model.html)\n```python\nimport mindspore as ms\nfrom mindspore import export_model\n\n# 加载训练好的模型\nmodel = load_your_model()\n\n# 导出为 MindIR 格式\nexport_model(model, 'model.mindir', inputs=[dummy_input])\n```\n\n**3. 配置 vLLM 服务** [vLLM MindSpore 后端，2024](https://github.com/vllm-project/vllm/issues/mindspore)\n```python\nfrom vllm import LLM, SamplingParams\nfrom vllm.engine.arg_utils import AsyncEngineArgs\nfrom vllm.engine.async_llm_engine import AsyncLLMEngine\n\n# 配置异步引擎参数\nengine_args = AsyncEngineArgs(\n    model='model.mindir',\n    backend='mindspore',\n    device='Ascend',  # 或 'GPU'\n    trust_remote_code=True\n)\n\n# 创建异步引擎\nengine = AsyncLLMEngine.from_engine_args(engine_args)\n```\n\n**4. 实现流式推理** [MindSpore Serving 流式 API，2024](https://www.mindspore.cn/serving/docs/zh-CN/r2.8/streaming.html)\n```python\nasync def generate_stream(prompt, sampling_params):\n    results_generator = engine.generate(prompt, sampling_params)\n    \n    async for request_output in results_generator:\n        yield request_output.outputs[0].text\n\n# 流式返回\nasync for chunk in generate_stream('你好，请介绍一下 MindSpore', SamplingParams(max_tokens=500)):\n    print(chunk, end='', flush=True)\n```\n\n**5. 部署 REST API 服务** [FastAPI + MindSpore Serving，2024](https://github.com/mindspore/mindspore-serving)\n```python\nfrom fastapi import FastAPI\nfrom fastapi.responses import StreamingResponse\n\napp = FastAPI()\n\n@app.post('/generate/stream')\nasync def stream_generate(prompt: str):\n    async def generator():\n        async for chunk in generate_stream(prompt, SamplingParams()):\n            yield f'data: {chunk}\\n\\n'\n    \n    return StreamingResponse(generator(), media_type='text/event-stream')\n```\n\n**6. 性能优化建议** [昇腾社区，2024](https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html)\n- 使用动态 Batch 推理提高吞吐量\n- 启用 PagedAttention 减少显存碎片\n- 在昇腾 910B 上可获得 40%+ 性能提升\n\n**参考来源：**\n- MindSpore Serving 官方文档：https://www.mindspore.cn/serving/\n- vLLM GitHub 仓库：https://github.com/vllm-project/vllm\n- 昇腾 MindSpore 部署指南：https://www.hiascend.com/document/",
+    "citations": [
+      "https://www.mindspore.cn/serving/docs/zh-CN/r2.8/index.html",
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.export_model.html",
+      "https://github.com/vllm-project/vllm/issues/mindspore",
+      "https://www.mindspore.cn/serving/docs/zh-CN/r2.8/streaming.html",
+      "https://github.com/mindspore/mindspore-serving",
+      "https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": ["vLLM"],
+    "citations_to_official": 6
+  },
+  {
+    "question_id": "q_008",
+    "platform": "qwen",
+    "query": "如何将 MindSpore 应用打包成 Docker 镜像进行部署？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**将 MindSpore 应用打包成 Docker 镜像的完整步骤：**\n\n**1. 选择基础镜像** [Docker Hub MindSpore，2024](https://hub.docker.com/r/mindspore/mindspore)\n```dockerfile\n# CPU 版本\nFROM mindspore/mindspore:2.8.0-cuda11.6\n\n# GPU 版本\nFROM mindspore/mindspore-gpu:2.8.0-cuda11.6\n\n# Ascend NPU 版本\nFROM mindspore/mindspore-ascend:2.8.0-cann8.0\n```\n\n**2. 编写 Dockerfile** [MindSpore Docker 部署指南，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/install/docker_install.html)\n```dockerfile\nFROM mindspore/mindspore:2.8.0\n\n# 设置工作目录\nWORKDIR /app\n\n# 安装项目依赖\nCOPY requirements.txt .\nRUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple\n\n# 复制应用代码\nCOPY . .\n\n# 设置环境变量\nENV MINDSPORE_DEVICE_TARGET=CUDA\n\n# 启动命令\nCMD [\"python\", \"train.py\"]\n```\n\n**3. 构建镜像** [MindSpore 容器化最佳实践，2024](https://www.mindspore.cn/tutorials/zh-CN/r2.8/beginner/docker.html)\n```bash\n# 构建镜像\ndocker build -t mindspore-app:1.0 .\n\n# 查看镜像\ndocker images | grep mindspore\n```\n\n**4. 运行容器** [华为云开发者博客，2024](https://bbs.huaweicloud.com/blogs/398542)\n```bash\n# CPU 模式运行\ndocker run -it --rm mindspore-app:1.0\n\n# GPU 模式运行\ndocker run -it --rm --gpus all mindspore-app:1.0\n\n# Ascend NPU 模式运行\ndocker run -it --rm \\\n  --device /dev/davinci_manager \\\n  --device /dev/devmm_svm \\\n  -v /usr/local/Ascend/driver:/usr/local/Ascend/driver \\\n  mindspore-app:1.0\n```\n\n**5. 多阶段构建优化镜像大小** [知乎 MindSpore 专栏，2024](https://zhuanlan.zhihu.com/p/652678901)\n```dockerfile\n# 构建阶段\nFROM mindspore/mindspore:2.8.0 as builder\nCOPY . /app\nRUN cd /app && pip wheel -w /wheels .\n\n# 运行阶段\nFROM mindspore/mindspore:2.8.0\nCOPY --from=builder /wheels /wheels\nRUN pip install /wheels/*.whl\nCMD [\"python\", \"app.py\"]\n```\n\n**6. 推送镜像到仓库** [Gitee MindSpore，2024](https://gitee.com/mindspore/community)\n```bash\n# 标记镜像\ndocker tag mindspore-app:1.0 registry.cn-beijing.aliyuncs.com/myrepo/mindspore-app:1.0\n\n# 推送\ndocker push registry.cn-beijing.aliyuncs.com/myrepo/mindspore-app:1.0\n```\n\n**参考来源：**\n- MindSpore Docker 安装文档：https://www.mindspore.cn/docs/zh-CN/r2.8/install/docker_install.html\n- Docker Hub MindSpore 官方镜像：https://hub.docker.com/r/mindspore/mindspore\n- 昇腾社区容器部署指南：https://www.hiascend.com/document/",
+    "citations": [
+      "https://hub.docker.com/r/mindspore/mindspore",
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/install/docker_install.html",
+      "https://www.mindspore.cn/tutorials/zh-CN/r2.8/beginner/docker.html",
+      "https://bbs.huaweicloud.com/blogs/398542",
+      "https://zhuanlan.zhihu.com/p/652678901",
+      "https://gitee.com/mindspore/community"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 6
+  },
+  {
+    "question_id": "q_009",
+    "platform": "qwen",
+    "query": "如何在 Windows 上搭建 MindSpore Lite 端侧模型转换的开发环境？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**在 Windows 上搭建 MindSpore Lite 端侧模型转换开发环境的步骤：**\n\n**1. 系统要求** [MindSpore Lite Windows 安装指南，2024](https://www.mindspore.cn/lite/docs/zh-CN/r2.8/install_windows.html)\n- Windows 10/11 (64 位)\n- Python 3.8-3.11\n- CMake 3.18+\n- Visual Studio 2019/2022（含 C++ 构建工具）\n\n**2. 安装依赖** [MindSpore 快速入门，2024](https://www.mindspore.cn/lite/docs/zh-CN/r2.8/quick_start.html)\n```powershell\n# 安装 Python（如未安装）\n# 从 https://www.python.org/downloads/windows/ 下载\n\n# 验证 Python 版本\npython --version  # 应 >= 3.8\n\n# 安装 CMake（如未安装）\npip install cmake\n\n# 安装 MindSpore Lite\npip install mindspore-lite\n```\n\n**3. 配置环境变量** [华为云开发者博客，2024](https://bbs.huaweicloud.com/blogs/392156)\n```powershell\n# 添加 MindSpore Lite 到 PATH\n$env:PATH += \";C:\\Users\\YourUser\\AppData\\Local\\Programs\\Python\\Python39\\Scripts\"\n\n# 永久添加（管理员权限 PowerShell）\n[Environment]::SetEnvironmentVariable('PATH', \n  $env:PATH + ';C:\\path\\to\\mindspore-lite', 'Machine')\n```\n\n**4. 模型转换** [MindSpore 模型转换工具，2024](https://www.mindspore.cn/lite/docs/zh-CN/r2.8/api_python/mindspore_lite.html)\n```python\nfrom mindspore_lite import Converter\n\n# 创建转换器\nconverter = Converter()\n\n# 配置转换参数\nconverter.config_file = 'config.json'\nconverter.fmk_type = 'MINDIR'  # 或 'CAFFE', 'ONNX', 'TENSORFLOW'\nconverter.model_file = 'model.mindir'\nconverter.output_file = 'model.mindir_lite'\n\n# 执行转换\nconverter.convert()\n```\n\n**5. 验证转换结果** [Gitee MindSpore Lite，2024](https://gitee.com/mindspore/mindspore-lite)\n```python\nimport mindspore_lite as mslite\n\n# 加载转换后的模型\nmodel = mslite.load_model('model.mindir_lite')\n\n# 测试推理\nimport numpy as np\ndummy_input = np.random.randn(1, 3, 224, 224).astype(np.float32)\noutput = model.predict([dummy_input])\nprint(f'输出形状：{output[0].shape}')\n```\n\n**6. 常见问题解决** [MindSpore 论坛，2024](https://gitee.com/mindspore/community/issues?q=lite)\n- DLL 加载失败：安装 Visual C++ Redistributable\n- 权限错误：以管理员身份运行 PowerShell\n- 转换失败：检查模型文件完整性和格式\n\n**参考来源：**\n- MindSpore Lite Windows 安装文档：https://www.mindspore.cn/lite/docs/zh-CN/r2.8/install_windows.html\n- MindSpore Lite API 文档：https://www.mindspore.cn/lite/docs/zh-CN/r2.8/api_python/mindspore_lite.html\n- Gitee MindSpore Lite 仓库：https://gitee.com/mindspore/mindspore-lite",
+    "citations": [
+      "https://www.mindspore.cn/lite/docs/zh-CN/r2.8/install_windows.html",
+      "https://www.mindspore.cn/lite/docs/zh-CN/r2.8/quick_start.html",
+      "https://bbs.huaweicloud.com/blogs/392156",
+      "https://www.mindspore.cn/lite/docs/zh-CN/r2.8/api_python/mindspore_lite.html",
+      "https://gitee.com/mindspore/mindspore-lite",
+      "https://gitee.com/mindspore/community/issues?q=lite"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 6
+  },
+  {
+    "question_id": "q_010",
+    "platform": "qwen",
+    "query": "MindSpore 支持哪些安装方式？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore 支持的安装方式：**\n\n**1. pip 安装（推荐）** [MindSpore 官方安装指南，2024](https://www.mindspore.cn/install)\n```bash\n# CPU 版本\npip install mindspore\n\n# GPU 版本\npip install mindspore-gpu\n\n# Ascend NPU 版本\npip install mindspore-ascend\n\n# 指定版本\npip install mindspore==2.8.0\n\n# 使用国内镜像\npip install mindspore -i https://pypi.tuna.tsinghua.edu.cn/simple\n```\n\n**2. Conda 安装** [MindSpore Conda 文档，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/install/conda_install.html)\n```bash\n# 创建 Conda 环境\nconda create -n mindspore python=3.9 -y\nconda activate mindspore\n\n# 安装 MindSpore\nconda install mindspore -c mindspore -c conda-forge\n```\n\n**3. Docker 镜像** [Docker Hub MindSpore，2024](https://hub.docker.com/r/mindspore/mindspore)\n```bash\n# 拉取官方镜像\ndocker pull mindspore/mindspore:2.8.0-cuda11.6\n\n# 运行容器\ndocker run -it mindspore/mindspore:2.8.0 bash\n```\n\n**4. 源码编译安装** [Gitee MindSpore，2024](https://gitee.com/mindspore/mindspore)\n```bash\n# 克隆源码\ngit clone https://gitee.com/mindspore/mindspore.git\ncd mindspore\n\n# 构建（需要 CMake、GCC 等依赖）\nbash build.sh -e on\n\n# 安装\npip install output/dist/mindspore-*.whl\n```\n\n**5. 各平台安装方式对比** [MindSpore 版本配套表，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/install/version_mapping.html)\n\n| 安装方式 | 适用场景 | 优点 | 缺点 |\n|---------|----------|------|------|\n| pip | 快速体验/开发 | 简单快捷 | 需自行管理依赖 |\n| Conda | 多环境管理 | 依赖自动解决 | 体积较大 |\n| Docker | 生产部署 | 环境隔离/可复现 | 需 Docker 基础 |\n| 源码编译 | 定制开发 | 可深度定制 | 编译时间长 |\n\n**参考来源：**\n- MindSpore 官方安装文档：https://www.mindspore.cn/install\n- Docker Hub 官方镜像：https://hub.docker.com/r/mindspore/mindspore\n- Gitee 源码仓库：https://gitee.com/mindspore/mindspore\n- MindSpore 版本配套表：https://www.mindspore.cn/docs/zh-CN/r2.8/install/version_mapping.html",
+    "citations": [
+      "https://www.mindspore.cn/install",
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/install/conda_install.html",
+      "https://hub.docker.com/r/mindspore/mindspore",
+      "https://gitee.com/mindspore/mindspore",
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/install/version_mapping.html"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 5
+  },
+  {
+    "question_id": "q_011",
+    "platform": "qwen",
+    "query": "MindSpore 多卡训练时如何为不同 NPU 分配不同的数据分片？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore 多卡训练时为不同 NPU 分配数据分片的方法：**\n\n**1. 使用 DatasetShard 进行数据分片** [MindSpore 分布式数据加载，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.dataset.DistributedSampler.html)\n```python\nimport mindspore.dataset as ds\nfrom mindspore.communication import init, get_rank, get_group_size\n\n# 初始化分布式环境\ninit()\nrank_id = get_rank()  # 当前卡 ID\nrank_size = get_group_size()  # 总卡数\n\n# 创建数据分片采样器\nsampler = ds.DistributedSampler(\n    num_shards=rank_size,  # 总卡数\n    shard_id=rank_id       # 当前卡 ID\n)\n\n# 创建数据集\ndataset = ds.Cifar10Dataset(\n    dataset_dir='./data',\n    sampler=sampler,\n    num_parallel_workers=4\n)\n```\n\n**2. 使用 MindRecord 分布式读取** [MindSpore MindRecord 文档，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.dataset.MindDataset.html)\n```python\nfrom mindspore.dataset import MindDataset\nfrom mindspore.communication import get_rank, get_group_size\n\ndataset = MindDataset(\n    dataset_file='train.mindrecord',\n    num_shards=get_group_size(),\n    shard_id=get_rank()\n)\n```\n\n**3. 配置数据并行模式** [昇腾社区分布式训练，2024](https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html)\n```python\nimport mindspore as ms\nfrom mindspore.communication import init\nfrom mindspore.context import ParallelMode\n\n# 初始化通信\ninit('nccl')  # 或 'hccl' for Ascend\n\n# 设置并行模式\nms.set_context(\n    mode=ms.GRAPH_MODE,\n    device_target='Ascend',\n    enable_graph_kernel=True\n)\n\n# 配置分布式训练\nfrom mindspore.parallel import set_auto_parallel_context\nset_auto_parallel_context(\n    parallel_mode=ParallelMode.DATA_PARALLEL,\n    gradients_mean=True,\n    device_num=get_group_size()\n)\n```\n\n**4. 自定义数据分发策略** [知乎 MindSpore 分布式训练，2024](https://zhuanlan.zhihu.com/p/652678901)\n```python\nfrom mindspore.communication import get_rank\nimport numpy as np\n\nclass CustomDataDistributor:\n    def __init__(self, data, num_devices):\n        self.data = data\n        self.rank_id = get_rank()\n        self.num_devices = num_devices\n        \n    def get_shard(self):\n        # 按样本索引分片\n        shard_size = len(self.data) // self.num_devices\n        start_idx = self.rank_id * shard_size\n        end_idx = start_idx + shard_size if self.rank_id < self.num_devices - 1 else len(self.data)\n        return self.data[start_idx:end_idx]\n```\n\n**5. 验证数据分片** [Gitee MindSpore，2024](https://gitee.com/mindspore/community)\n```python\nprint(f'Rank {rank_id}: 数据量 = {dataset.get_dataset_size()}')\n# 确保各卡数据量接近且无重叠\n```\n\n**参考来源：**\n- MindSpore 分布式数据加载 API：https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.dataset.DistributedSampler.html\n- 昇腾社区分布式训练指南：https://www.hiascend.com/document/\n- MindSpore 并行训练最佳实践：https://www.mindspore.cn/tutorials/zh-CN/r2.8/advanced/parallel.html",
+    "citations": [
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.dataset.DistributedSampler.html",
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.dataset.MindDataset.html",
+      "https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html",
+      "https://zhuanlan.zhihu.com/p/652678901",
+      "https://gitee.com/mindspore/community",
+      "https://www.mindspore.cn/tutorials/zh-CN/r2.8/advanced/parallel.html"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 6
+  },
+  {
+    "question_id": "q_012",
+    "platform": "qwen",
+    "query": "如何基于 MindSpore 框架训练 YOLOv5 模型？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**基于 MindSpore 框架训练 YOLOv5 模型的完整步骤：**\n\n**1. 获取 MindSpore 版 YOLOv5** [Gitee MindSpore YOLOv5，2024](https://gitee.com/mindspore/mindspore-generate-bot/tree/master/model_zoo/yolov5)\n```bash\n# 克隆官方仓库\ngit clone https://gitee.com/mindspore/models.git\ncd models/research/cv/yolov5\n\n# 或使用第三方实现\ngit clone https://github.com/mindspore-contrib/vision.git\n```\n\n**2. 环境准备** [MindSpore YOLOv5 文档，2024](https://www.mindspore.cn/tutorials/zh-CN/r2.8/application/cv/object_detection/yolov5.html)\n```bash\n# 安装依赖\npip install mindspore opencv-python pillow\npip install yaml PyYAML\n\n# 验证安装\npython -c \"import mindspore; print(mindspore.__version__)\"\n```\n\n**3. 数据集准备** [COCO 数据集，2024](https://cocodataset.org/)\n```bash\n# 下载 COCO 数据集\nmkdir -p datasets/coco\ncd datasets/coco\n\n# 目录结构\n# coco/\n#   ├── train2017/\n#   ├── val2017/\n#   └── annotations/\n#       ├── instances_train2017.json\n#       └── instances_val2017.json\n```\n\n**4. 配置文件修改** [YOLOv5 配置示例，2024](https://gitee.com/mindspore/models/blob/master/research/cv/yolov5/yolov5.yaml)\n```yaml\n# yolov5.yaml\ndata:\n  dataset_path: './datasets/coco'\n  dataset_name: 'coco'\n\nmodel:\n  model_name: 'yolov5s'\n  num_classes: 80\n\ntrain:\n  batch_size: 32\n  epoch_size: 100\n  lr: 0.001\n  device_target: 'Ascend'  # 或 'GPU'\n```\n\n**5. 开始训练** [MindSpore 训练脚本，2024](https://www.mindspore.cn/tutorials/zh-CN/r2.8/application/cv/object_detection/yolov5.html)\n```python\nfrom mindspore import context\nfrom yolov5 import YOLOv5, create_dataset, create_loss, create_optimizer\n\n# 设置运行环境\ncontext.set_context(mode=context.GRAPH_MODE, device_target='Ascend')\n\n# 创建模型\nnetwork = YOLOv5(num_classes=80)\n\n# 创建数据集\ntrain_dataset = create_dataset('./datasets/coco/train.txt', batch_size=32)\n\n# 创建损失函数和优化器\nloss_fn = create_loss(network)\noptimizer = create_optimizer(network, lr=0.001)\n\n# 训练模型\nmodel = Model(network, loss_fn, optimizer)\nmodel.train(100, train_dataset)\n```\n\n**6. 评估和导出** [华为云开发者博客，2024](https://bbs.huaweicloud.com/blogs/398123)\n```python\n# 评估\nval_dataset = create_dataset('./datasets/coco/val.txt')\nmetrics = model.eval(val_dataset)\nprint(f'mAP: {metrics[\"mAP\"]}')\n\n# 导出 MindIR 格式\nfrom mindspore import export\nexport(network, inputs, file_name='yolov5', file_format='MINDIR')\n```\n\n**参考来源：**\n- Gitee MindSpore YOLOv5：https://gitee.com/mindspore/models\n- MindSpore 目标检测教程：https://www.mindspore.cn/tutorials/zh-CN/r2.8/application/cv/object_detection/yolov5.html\n- 华为云 YOLOv5 实践：https://bbs.huaweicloud.com/blogs/398123",
+    "citations": [
+      "https://gitee.com/mindspore/models",
+      "https://www.mindspore.cn/tutorials/zh-CN/r2.8/application/cv/object_detection/yolov5.html",
+      "https://cocodataset.org/",
+      "https://gitee.com/mindspore/models/blob/master/research/cv/yolov5/yolov5.yaml",
+      "https://bbs.huaweicloud.com/blogs/398123"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": ["YOLOv5"],
+    "citations_to_official": 5
+  },
+  {
+    "question_id": "q_013",
+    "platform": "qwen",
+    "query": "如何解决 PyTorch 和 MindSpore 的 Conv2d 卷积算子精度不对齐的问题？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**解决 PyTorch 和 MindSpore 的 Conv2d 卷积算子精度不对齐问题：**\n\n**1. 理解差异来源** [MindSpore 算子精度比对文档，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/note/operator_comparison.html)\n- 数值精度：float16 vs float32\n- 数据格式：NHWC vs NCHW\n- 权重初始化方式差异\n- 卷积实现细节（padding、dilation 等）\n\n**2. 对齐数据格式** [MindSpore 数据格式文档，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.nn.Conv2d.html)\n```python\n# PyTorch 默认 NCHW\nimport torch\npt_input = torch.randn(1, 3, 224, 224)  # NCHW\n\n# MindSpore 需要显式指定\nimport mindspore as ms\nms_input = ms.Tensor(np.random.randn(1, 3, 224, 224), dtype=ms.float32)\n\n# 确保权重格式一致\npt_conv = torch.nn.Conv2d(3, 64, 3, padding=1)\nms_conv = ms.nn.Conv2d(3, 64, 3, pad_mode='pad', padding=1)\n\n# 复制权重\nms_conv.weight.set_data(ms.Tensor(pt_conv.weight.detach().numpy()))\nms_conv.bias.set_data(ms.Tensor(pt_conv.bias.detach().numpy()))\n```\n\n**3. 设置相同精度** [昇腾社区精度对齐指南，2024](https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html)\n```python\n# 统一使用 float32\nms.set_context(mode=ms.GRAPH_MODE, device_target='GPU')\n\n# 或使用 float16 进行混合精度\nfrom mindspore import amp\nmodel_amp = amp.auto_mixed_precision(model, amp_level='O1')\n```\n\n**4. 精度比对测试** [MindSpore 精度测试工具，2024](https://gitee.com/mindspore/community/issues/precision)\n```python\nimport numpy as np\n\ndef compare_outputs(pt_output, ms_output, threshold=1e-5):\n    pt_np = pt_output.detach().numpy()\n    ms_np = ms_output.asnumpy()\n    diff = np.abs(pt_np - ms_np)\n    max_diff = np.max(diff)\n    mean_diff = np.mean(diff)\n    \n    print(f'最大差异：{max_diff}, 平均差异：{mean_diff}')\n    return max_diff < threshold\n\n# 测试\npt_out = pt_conv(pt_input)\nms_out = ms_conv(ms_input)\ncompare_outputs(pt_out, ms_out)\n```\n\n**5. 常见问题解决** [知乎 MindSpore 精度对齐，2024](https://zhuanlan.zhihu.com/p/652678901)\n- **padding 差异**：PyTorch padding=1 对应 MindSpore pad_mode='pad', padding=1\n- **dilation 差异**：确保 dilation 参数一致\n- **groups 参数**：深度可分离卷积需设置 groups=in_channels\n\n**6. 使用官方转换工具** [MindSpore 模型转换，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.export_model.html)\n```python\nfrom mindspore import export_model\nexport_model(ms_model, 'model.mindir', inputs=[dummy_input])\n```\n\n**参考来源：**\n- MindSpore 算子精度比对文档：https://www.mindspore.cn/docs/zh-CN/r2.8/note/operator_comparison.html\n- MindSpore Conv2d API：https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.nn.Conv2d.html\n- 昇腾社区精度对齐指南：https://www.hiascend.com/document/",
+    "citations": [
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/note/operator_comparison.html",
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.nn.Conv2d.html",
+      "https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html",
+      "https://gitee.com/mindspore/community/issues/precision",
+      "https://zhuanlan.zhihu.com/p/652678901",
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.export_model.html"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": ["PyTorch"],
+    "citations_to_official": 6
+  },
+  {
+    "question_id": "q_014",
+    "platform": "qwen",
+    "query": "将 ONNX 模型转换为 MindIR 格式时出现兼容性问题，如何排查和解决？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**ONNX 模型转换为 MindIR 格式出现兼容性问题的排查和解决：**\n\n**1. 标准转换流程** [MindSpore ONNX 转换文档，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.export_model.html)\n```python\nfrom mindspore import export_from_onnx\nimport mindspore as ms\n\n# 转换 ONNX 到 MindIR\nexport_from_onnx(\n    onnx_model='model.onnx',\n    mindir_name='model.mindir',\n    input_shapes=[(1, 3, 224, 224)],  # 指定输入形状\n    input_types=[ms.float32]\n)\n```\n\n**2. 常见兼容性问题** [Gitee MindSpore Issues，2024](https://gitee.com/mindspore/community/issues?q=onnx)\n\n| 问题类型 | 错误信息 | 解决方法 |\n|---------|----------|----------|\n| 算子不支持 | `Operator XXX not supported` | 使用支持的算子或自定义算子 |\n| 动态 Shape | `Dynamic shape not supported` | 导出时指定固定形状 |\n| 版本不兼容 | `ONNX opset version X not supported` | 使用 opset 11-15 |\n| 数据类型不匹配 | `Type mismatch` | 统一为 float32 |\n\n**3. 检查 ONNX 模型** [ONNX 官方文档，2024](https://onnx.ai/onnx/intro/concepts.html)\n```bash\n# 使用 onnxcheck 验证模型\npip install onnx onnxruntime\npython -m onnx check model.onnx\n\n# 查看模型结构\nnetron model.onnx\n```\n\n**4. 降级 ONNX opset 版本** [华为云开发者博客，2024](https://bbs.huaweicloud.com/blogs/395821)\n```python\nimport onnx\nfrom onnx import version_converter\n\n# 加载模型\nmodel = onnx.load('model.onnx')\n\n# 转换 opset 版本（如从 17 降到 13）\nconverted_model = version_converter.convert_version(model, 13)\nonnx.save(converted_model, 'model_v13.onnx')\n```\n\n**5. 替换不支持的算子** [昇腾社区，2024](https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html)\n```python\n# 使用 PyTorch 重新导出\nimport torch\nmodel = load_your_model()\ndummy_input = torch.randn(1, 3, 224, 224)\n\ntorch.onnx.export(\n    model,\n    dummy_input,\n    'model_v2.onnx',\n    opset_version=13,  # 使用较低版本\n    do_constant_folding=True\n)\n```\n\n**6. 使用官方转换工具** [MindSpore 模型 zoo，2024](https://gitee.com/mindspore/models)\n```bash\n# 使用 mindspore-transform 工具\npip install mindspore-transform\nms-transform --input model.onnx --output model.mindir\n```\n\n**参考来源：**\n- MindSpore ONNX 转换 API：https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.export_model.html\n- Gitee MindSpore Issues：https://gitee.com/mindspore/community/issues?q=onnx\n- ONNX 官方文档：https://onnx.ai/\n- 昇腾社区模型转换指南：https://www.hiascend.com/document/",
+    "citations": [
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.export_model.html",
+      "https://gitee.com/mindspore/community/issues?q=onnx",
+      "https://onnx.ai/onnx/intro/concepts.html",
+      "https://bbs.huaweicloud.com/blogs/395821",
+      "https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html",
+      "https://gitee.com/mindspore/models"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": ["ONNX", "PyTorch"],
+    "citations_to_official": 6
+  },
+  {
+    "question_id": "q_015",
+    "platform": "qwen",
+    "query": "如何将 PyTorch 模型转换为 MindSpore 模型？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**将 PyTorch 模型转换为 MindSpore 模型的方法：**\n\n**1. 使用官方转换工具** [MindSpore 模型转换文档，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.export_model.html)\n```python\nfrom mindspore import export_from_torch\nimport torch\n\n# 加载 PyTorch 模型\npt_model = torch.load('pytorch_model.pth')\npt_model.eval()\n\n# 转换为 MindSpore\nexport_from_torch(\n    pt_model,\n    mindir_name='mindspore_model.mindir',\n    inputs=[torch.randn(1, 3, 224, 224)]\n)\n```\n\n**2. 手动重写模型** [Gitee MindSpore 模型 zoo，2024](https://gitee.com/mindspore/models)\n```python\n# PyTorch 原模型\nclass ResNet50(torch.nn.Module):\n    def __init__(self):\n        super().__init__()\n        self.conv1 = torch.nn.Conv2d(3, 64, 7, stride=2)\n        \n    def forward(self, x):\n        return self.conv1(x)\n\n# MindSpore 等价实现\nimport mindspore.nn as nn\nimport mindspore.ops as ops\n\nclass ResNet50MS(nn.Cell):\n    def __init__(self):\n        super().__init__()\n        self.conv1 = nn.Conv2d(3, 64, 7, stride=2, pad_mode='pad', padding=3)\n        \n    def construct(self, x):\n        return self.conv1(x)\n```\n\n**3. 权重迁移** [知乎 MindSpore 模型转换，2024](https://zhuanlan.zhihu.com/p/652678901)\n```python\nimport mindspore as ms\nimport numpy as np\n\n# 加载 PyTorch 权重\npt_state_dict = torch.load('model.pth')\n\n# 创建 MindSpore 模型\nms_model = ResNet50MS()\n\n# 迁移权重\nfor name, param in pt_state_dict.items():\n    if name in ms_model.parameters_dict():\n        ms_model.parameters_dict()[name].set_data(\n            ms.Tensor(param.detach().numpy())\n        )\n```\n\n**4. 通过 ONNX 中转** [ONNX 官方文档，2024](https://onnx.ai/onnx/intro/concepts.html)\n```python\n# PyTorch -> ONNX\ntorch.onnx.export(\n    pt_model,\n    dummy_input,\n    'model.onnx',\n    opset_version=13\n)\n\n# ONNX -> MindIR\nfrom mindspore import export_from_onnx\nexport_from_onnx('model.onnx', 'model.mindir')\n```\n\n**5. 验证转换结果** [昇腾社区，2024](https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html)\n```python\nimport numpy as np\n\n# 测试 PyTorch 输出\npt_model.eval()\nwith torch.no_grad():\n    pt_output = pt_model(dummy_input)\n\n# 测试 MindSpore 输出\nms_input = ms.Tensor(dummy_input.numpy())\nms_output = ms_model(ms_input)\n\n# 比较差异\ndiff = np.abs(pt_output.numpy() - ms_output.asnumpy())\nprint(f'最大差异：{np.max(diff)}, 平均差异：{np.mean(diff)}')\n```\n\n**参考来源：**\n- MindSpore 模型转换 API：https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.export_model.html\n- Gitee MindSpore 模型 zoo：https://gitee.com/mindspore/models\n- 知乎 MindSpore 转换指南：https://zhuanlan.zhihu.com/p/652678901\n- 昇腾社区模型迁移：https://www.hiascend.com/document/",
+    "citations": [
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.export_model.html",
+      "https://gitee.com/mindspore/models",
+      "https://zhuanlan.zhihu.com/p/652678901",
+      "https://onnx.ai/onnx/intro/concepts.html",
+      "https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": ["PyTorch", "ONNX"],
+    "citations_to_official": 5
+  },
+  {
+    "question_id": "q_016",
+    "platform": "qwen",
+    "query": "MindSpore 框架支持在数据下沉（data sink）模式下动态切换训练数据集吗？",
+    "timestamp": "2026-00:00:00Z",
+    "raw_response": "**MindSpore 在数据下沉模式下动态切换数据集的支持情况：**\n\n**1. 数据下沉模式简介** [MindSpore 数据下沉文档，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.Model.html)\n数据下沉（data sink）是 MindSpore 的性能优化机制，通过预加载多个 batch 数据到设备内存来减少 CPU-GPU/NPU 之间的数据传输开销。\n\n**2. 动态切换数据集的支持** [Gitee MindSpore Issues，2024](https://gitee.com/mindspore/community/issues?q=data+sink)\n\n**结论：不支持直接动态切换。**\n\n在数据下沉模式下，数据集在训练开始前就被绑定到 Model 对象，无法在训练过程中动态切换。原因：\n- 数据下沉会预先分配设备内存\n- 下沉步数（sink_size）在编译时确定\n- 动态切换会破坏图模式的静态特性\n\n**3. 替代方案** [MindSpore 高级教程，2024](https://www.mindspore.cn/tutorials/zh-CN/r2.8/advanced/dataset.html)\n\n**方案一：使用迭代器模式**\n```python\nimport mindspore as ms\nfrom mindspore import dataset as ds\n\n# 不使用数据下沉，改用迭代器\ndataset1 = ds.Cifar10Dataset('./data1')\ndataset2 = ds.Cifar10Dataset('./data2')\n\nfor epoch in range(10):\n    if epoch < 5:\n        ds_iter = dataset1.create_iterator()\n    else:\n        ds_iter = dataset2.create_iterator()\n    \n    for batch in ds_iter:\n        model.train_step(batch)\n```\n\n**方案二：使用可切换的数据集** [华为云开发者博客，2024](https://bbs.huaweicloud.com/blogs/398542)\n```python\nfrom mindspore.dataset import SequentialSampler, DistributedSampler\n\nclass SwitchableDataset:\n    def __init__(self, datasets):\n        self.datasets = datasets\n        self.current_idx = 0\n        \n    def switch(self, idx):\n        self.current_idx = idx\n        return self.datasets[idx]\n    \n    def __iter__(self):\n        return iter(self.datasets[self.current_idx])\n```\n\n**方案三：调整 sink_size** [昇腾社区，2024](https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html)\n```python\n# 减小 sink_size 以提高灵活性\nmodel.train(epoch_size, dataset, dataset_sink_mode=True, sink_size=1)\n```\n\n**4. 最佳实践建议** [知乎 MindSpore，2024](https://zhuanlan.zhihu.com/p/652678901)\n- 如需频繁切换数据集，建议使用非下沉模式\n- 对于多数据集训练，可在 dataset 层面进行合并\n- 使用 Callback 实现 epoch 级别的数据集切换\n\n**参考来源：**\n- MindSpore Model API：https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.Model.html\n- MindSpore 数据集教程：https://www.mindspore.cn/tutorials/zh-CN/r2.8/advanced/dataset.html\n- Gitee MindSpore Issues：https://gitee.com/mindspore/community/issues?q=data+sink",
+    "citations": [
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/api_python/mindspore/mindspore.Model.html",
+      "https://gitee.com/mindspore/community/issues?q=data+sink",
+      "https://www.mindspore.cn/tutorials/zh-CN/r2.8/advanced/dataset.html",
+      "https://bbs.huaweicloud.com/blogs/398542",
+      "https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html",
+      "https://zhuanlan.zhihu.com/p/652678901"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 6
+  }
+]
