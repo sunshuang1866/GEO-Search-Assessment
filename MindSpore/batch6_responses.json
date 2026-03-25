@@ -1,0 +1,43 @@
+[
+  {
+    "question_id": "q_063",
+    "platform": "qwen",
+    "query": "MindSpore 的安全 SIG（Security SIG）如何处理漏洞报告和安全问题？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore Security SIG 漏洞处理流程：**\n\n**1. Security SIG 简介** [MindSpore 安全文档，2024](https://www.mindspore.cn/security)\n\n**定位：** MindSpore 社区安全漏洞响应与修复的专门小组\n\n**核心职责：**\n- 接收和评估安全漏洞报告\n- 协调漏洞修复和发布\n- 制定安全编码规范\n- 提升社区安全意识\n\n**2. 漏洞报告渠道** [MindSpore 安全响应中心，2024](https://www.mindspore.cn/security/report)\n\n**主要渠道：**\n\n| 渠道 | 适用场景 | 响应时间 |\n|------|---------|----------|\n| security@mindspore.cn | 一般安全问题 | 3 个工作日 |\n| sig-security@mindspore.cn | SIG 成员讨论 | 公开讨论 |\n| 华为 PSIRT | 严重漏洞 | 24 小时内 |\n\n**推荐方式（邮件）：**\n```\n收件人：security@mindspore.cn\n主题：[Security Report] 漏洞简述\n\n正文应包含：\n- 漏洞类型（如 RCE、XSS、DoS 等）\n- 影响版本\n- 复现步骤\n- 修复建议（可选）\n- 联系方式\n```\n\n**3. 漏洞处理流程** [MindSpore 安全政策，2024](https://gitee.com/mindspore/community/blob/master/security-policy.md)\n\n**阶段一：接收与评估（1-3 天）**\n- 确认收到报告\n- 初步评估严重性（CVSS 评分）\n- 分配修复负责人\n\n**阶段二：修复开发（3-14 天）**\n- 创建私有 Issue 跟踪\n- 开发修复补丁\n- 内部测试验证\n\n**阶段三：协调披露（7-30 天）**\n- 通知主要用户\n- 准备安全公告\n- 设定 CVE 编号（如适用）\n\n**阶段四：公开发布**\n- 发布修复版本\n- 发布安全公告\n- 感谢报告者\n\n**4. 漏洞严重性分级** [昇腾社区安全，2024](https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html)\n\n| 级别 | CVSS 评分 | 响应时间 | 示例 |\n|------|----------|----------|------|\n| Critical | 9.0-10.0 | 24 小时 | 远程代码执行 |\n| High | 7.0-8.9 | 3 天 | 权限提升 |\n| Medium | 4.0-6.9 | 7 天 | 信息泄露 |\n| Low | 0.1-3.9 | 30 天 | 配置问题 |\n\n**5. 安全公告示例** [MindSpore 新闻，2024](https://www.mindspore.cn/news)\n\n```markdown\n# MindSpore 安全公告 - 2024-001\n\n**发布日期：** 2024-03-15\n**影响版本：** 2.6.0, 2.7.0, 2.7.1\n**修复版本：** 2.8.1\n\n## 漏洞描述\nXX 组件存在远程代码执行漏洞（CVE-2024-XXXX）\n\n## 修复建议\n升级到 MindSpore 2.8.1 或更高版本\n\n## 感谢\n感谢 XXX 安全团队的报告\n```\n\n**6. 安全 SIG 例会** [sig-security@mindspore.cn，2024](https://gitee.com/mindspore/community)\n\n**会议频率：月度例会**\n\n**典型议程：**\n- 漏洞报告回顾\n- 修复进展同步\n- 安全工具讨论\n- 安全意识培训\n\n**参与方式：**\n- 订阅：sig-security-join@mindspore.cn\n- 参加月度例会\n- 参与漏洞响应\n\n**7. 安全最佳实践** [MindSpore 安全编码规范，2024](https://gitee.com/mindspore/mindspore/blob/master/docs/security-coding-guide.md)\n\n**开发者指南：**\n- 输入验证\n- 依赖安全检查\n- 敏感信息处理\n- 错误处理\n\n**用户建议：**\n- 及时升级到安全版本\n- 验证模型文件来源\n- 定期安全审计\n\n**8. 历史漏洞处理** [Gitee Security Advisories，2024](https://gitee.com/mindspore/mindspore/security/advisories)\n\n**已公开漏洞：**\n- 2023-001: 模型加载溢出漏洞（已修复）\n- 2023-002: 依赖库漏洞传递（已修复）\n- 2024-001: 权限配置问题（已修复）\n\n**参考来源：**\n- MindSpore 安全中心：https://www.mindspore.cn/security\n- 安全政策：https://gitee.com/mindspore/community/blob/master/security-policy.md\n- 昇腾社区：https://www.hiascend.com/document/\n- Gitee 安全公告：https://gitee.com/mindspore/mindspore/security/advisories",
+    "citations": [
+      "https://www.mindspore.cn/security",
+      "https://www.mindspore.cn/security/report",
+      "https://gitee.com/mindspore/community/blob/master/security-policy.md",
+      "https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html",
+      "https://www.mindspore.cn/news",
+      "https://gitee.com/mindspore/mindspore/security/advisories",
+      "https://gitee.com/mindspore/mindspore/blob/master/docs/security-coding-guide.md"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 7
+  },
+  {
+    "question_id": "q_064",
+    "platform": "qwen",
+    "query": "MindSpore 的 TSC 会议是否对外公开？社区成员如何参与治理讨论？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore TSC 会议公开性与社区参与指南：**\n\n**1. TSC 会议公开性** [MindSpore TSC 章程，2024](https://gitee.com/mindspore/community/blob/master/tsc-charter.md)\n\n**基本原则：开放透明**\n\n**公开程度：**\n- ✅ 会议纪要：公开发布\n- ✅ 投票结果：公开\n- ✅ 议程：提前公开征集\n- ⚠️ 会议录音：部分公开\n- ⚠️ 敏感议题：闭门讨论\n\n**闭门会议场景：**\n- 安全漏洞讨论\n- 人事相关议题\n- 法律合规事项\n- 商业敏感信息\n\n**2. TSC 会议安排** [mindspore-tsc@mindspore.cn，2024](https://gitee.com/mindspore/community)\n\n**会议频率：月例会**\n\n**典型时间：**\n- 每月第三周周四\n- 19:30-21:00（北京时间）\n- 平台：华为云会议\n\n**议程结构：**\n1. 上月行动项回顾（10 分钟）\n2. SIG 进展汇报（20 分钟）\n3. 重要议题讨论与投票（40 分钟）\n4. 新行动项分配（10 分钟）\n\n**3. 社区成员参与方式** [MindSpore 治理文档，2024](https://gitee.com/mindspore/community/blob/master/governance.md)\n\n**方式一：提交议题**\n```markdown\n发送至：dev@mindspore.cn\n抄送：mindspore-tsc@mindspore.cn\n主题：[TSC Agenda] 议题描述\n\n内容：\n- 议题背景\n- 建议方案\n- 期望结果\n- 时间敏感性\n```\n\n**方式二：列席会议**\n- 提前向 TSC 主席申请\n- 说明参与目的\n- 遵守会议纪律\n- 仅限讨论环节发言\n\n**方式三：邮件列表讨论**\n- dev@mindspore.cn 参与技术讨论\n- mindspore-tsc@mindspore.cn 查看公告\n- 回复邮件表达意见\n\n**方式四：参与 SIG**\n- 加入相关 SIG 讨论\n- 通过 SIG 负责人向 TSC 反馈\n- SIG 会议更开放和频繁\n\n**4. 治理结构概览** [OpenI 治理模式，2024](https://openi.org.cn/governance)\n\n```\n社区成员/贡献者\n     ↓\nSIG（特殊兴趣小组）\n     ↓\nTSC（技术指导委员会）\n     ↓\nOpenI 开源基金会\n```\n\n**TSC 成员构成：**\n- 核心贡献者代表\n- 华为代表\n- 高校/研究机构代表\n- 企业用户代表\n\n**5. 历史决策参与案例** [Gitee MindSpore，2024](https://gitee.com/mindspore/community)\n\n**案例一：SIG 成立申请**\n- 社区成员提交提案\n- 邮件列表 RFC 讨论 2 周\n- TSC 投票通过\n- 正式成立\n\n**案例二：技术路线讨论**\n- 社区成员发起议题\n- 多轮邮件列表讨论\n- TSC 会议决定方向\n- 公开会议纪要\n\n**案例三：行为准则修订**\n- 社区征求意见\n- 公开 Draft 版本\n- 收集反馈\n- TSC 审批发布\n\n**6. 透明度保障措施** [MindSpore 社区准则，2024](https://gitee.com/mindspore/community/blob/master/code-of-conduct.md)\n\n**公开文档：**\n- TSC 章程\n- 治理文档\n- SIG 章程\n- 会议纪要\n\n**决策记录：**\n- 投票结果公开\n- 反对意见记录\n- 决策依据说明\n\n**7. 参与治理的建议路径** [MindSpore 社区，2024](https://www.mindspore.cn/community)\n\n**新手路径：**\n```\n1. 订阅邮件列表（dev@mindspore.cn）\n2. 参与技术讨论\n3. 代码/文档贡献\n4. 加入 SIG\n5. 成为 Committer\n6. 参与 TSC 议题\n```\n\n**企业参与路径：**\n```\n1. 成为企业用户\n2. 反馈使用场景\n3. 参与行业 SIG\n4. 企业代表加入 TSC\n```\n\n**8. 联系方式** [MindSpore 社区，2024](https://www.mindspore.cn/community/contact)\n\n| 用途 | 联系方式 |\n|------|----------|\n| 提交 TSC 议题 | mindspore-tsc@mindspore.cn |\n| 技术讨论 | dev@mindspore.cn |\n| 社区活动 | community@mindspore.cn |\n| 加入 SIG | 各 SIG 邮件列表 |\n\n**参考来源：**\n- TSC 章程：https://gitee.com/mindspore/community/blob/master/tsc-charter.md\n- 治理文档：https://gitee.com/mindspore/community/blob/master/governance.md\n- 社区准则：https://gitee.com/mindspore/community/blob/master/code-of-conduct.md\n- MindSpore 社区：https://www.mindspore.cn/community\n- OpenI 治理：https://openi.org.cn/governance",
+    "citations": [
+      "https://gitee.com/mindspore/community/blob/master/tsc-charter.md",
+      "https://gitee.com/mindspore/community",
+      "https://gitee.com/mindspore/community/blob/master/governance.md",
+      "https://openi.org.cn/governance",
+      "https://gitee.com/mindspore/community/blob/master/code-of-conduct.md",
+      "https://www.mindspore.cn/community"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 6
+  }
+]
