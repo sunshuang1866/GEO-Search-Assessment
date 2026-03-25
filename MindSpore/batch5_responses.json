@@ -1,0 +1,81 @@
+[
+  {
+    "question_id": "q_052",
+    "platform": "qwen",
+    "query": "如何向 MindSpore 邮件列表发送邮件或订阅邮件列表？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore 邮件列表订阅和发送指南：**\n\n**1. MindSpore 邮件列表列表** [OpenI 邮件列表，2024](https://openi.org.cn/mindspore/mindspore)\n\n| 邮件列表 | 用途 | 受众 |\n|---------|------|------|\n| dev@mindspore.cn | 技术开发讨论 | 开发者、贡献者 |\n| mindspore-tsc@mindspore.cn | TSC 技术委员会 | TSC 成员、SIG 负责人 |\n| mindspore-discuss@mindspore.cn | 用户讨论 | 普通用户、学习者 |\n| sig-security@mindspore.cn | 安全相关 | 安全研究者 |\n\n**2. 订阅邮件列表** [Gitee MindSpore，2024](https://gitee.com/mindspore/community)\n\n**方式一：发送邮件订阅**\n```\n收件人：[列表名称]-join@[列表域名]\n例如：dev-join@mindspore.cn\n主题：（任意）\n正文：（任意，可留空）\n\n系统会自动回复确认邮件，回复确认即可完成订阅。\n```\n\n**方式二：通过 OpenI 平台** [OpenI 开源平台，2024](https://openi.org.cn/mindspore/mindspore)\n1. 访问 https://openi.org.cn/mindspore/mindspore\n2. 登录/注册账号\n3. 点击\"订阅邮件列表\"\n4. 选择要订阅的列表\n\n**方式三：通过 Gitee** [Gitee MindSpore，2024](https://gitee.com/mindspore/mindspore)\n1. 访问 Gitee MindSpore 主页\n2. 点击\"社区\" -> \"邮件列表\"\n3. 点击订阅按钮\n\n**3. 取消订阅** [MindSpore 社区，2024](https://www.mindspore.cn/community)\n\n**方式一：发送邮件取消**\n```\n收件人：[列表名称]-leave@mindspore.cn\n例如：dev-leave@mindspore.cn\n主题：（任意）\n正文：（任意，可留空）\n```\n\n**方式二：邮件底部链接**\n- 每封邮件列表邮件底部有取消订阅链接\n- 点击链接确认即可取消\n\n**4. 发送邮件到邮件列表** [dev@mindspore.cn 使用指南，2024](https://gitee.com/mindspore/community)\n\n**前提条件：**\n- 必须是已订阅成员\n- 邮件需经过审核（防垃圾）\n\n**邮件格式规范：**\n```\n收件人：dev@mindspore.cn\n主题：[类别] 简洁描述\n\n正文：\n- 清晰描述问题或议题\n- 附上相关代码/日志（使用代码块）\n- 签名（姓名/机构/Gitee ID）\n```\n\n**主题前缀建议：**\n- `[Question]` - 技术问题\n- `[Proposal]` - 功能提案\n- `[RFC]` - 征求意见\n- `[Announcement]` - 公告\n- `[SIG-XXX]` - 特定 SIG 议题\n\n**5. 邮件列表礼仪** [MindSpore 社区准则，2024](https://gitee.com/mindspore/community/blob/master/code-of-conduct.md)\n\n**最佳实践：**\n- ✅ 先搜索历史邮件，避免重复\n- ✅ 主题清晰具体\n- ✅ 回复时保留相关上下文\n- ✅ 使用纯文本格式（避免 HTML）\n- ✅ 签名简洁\n\n**避免行为：**\n- ❌ 跨列表发送相同内容\n- ❌ 发送大附件（使用链接代替）\n- ❌ 顶贴/无意义回复\n- ❌ 人身攻击或不当言论\n\n**6. 常见问题** [Gitee MindSpore Issues，2024](https://gitee.com/mindspore/community/issues)\n\n**Q: 发送的邮件为何没显示？**\nA: 新成员邮件需审核，1-2 个工作日内处理。\n\n**Q: 收到订阅确认但没收到邮件？**\nA: 检查垃圾邮件箱，或联系社区运营。\n\n**Q: 如何查看历史邮件存档？**\nA: 访问 https://gitee.com/mindspore/community/issues 搜索。\n\n**7. 联系方式** [MindSpore 社区，2024](https://www.mindspore.cn/community/contact)\n\n**技术支持：**\n- 订阅问题：community@mindspore.cn\n- 技术问题：dev@mindspore.cn\n\n**参考来源：**\n- OpenI 邮件列表：https://openi.org.cn/mindspore/mindspore\n- Gitee MindSpore: https://gitee.com/mindspore/mindspore\n- MindSpore 社区：https://www.mindspore.cn/community\n- 社区准则：https://gitee.com/mindspore/community/blob/master/code-of-conduct.md",
+    "citations": [
+      "https://openi.org.cn/mindspore/mindspore",
+      "https://gitee.com/mindspore/mindspore",
+      "https://gitee.com/mindspore/community",
+      "https://www.mindspore.cn/community",
+      "https://gitee.com/mindspore/community/issues",
+      "https://gitee.com/mindspore/community/blob/master/code-of-conduct.md"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 6
+  },
+  {
+    "question_id": "q_054",
+    "platform": "qwen",
+    "query": "MindSpore 的邮件列表系统使用什么平台？如何查看历史邮件存档？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore 邮件列表系统详解：**\n\n**1. 邮件列表平台** [OpenI 邮件列表，2024](https://openi.org.cn/mindspore/mindspore)\n\n**使用平台：OpenI 邮件列表服务**\n\n**技术架构：**\n- 基于 Mailman 3 开源系统\n- 由开放原子开源基金会（OpenI）提供基础设施\n- 支持网页界面和邮件接口\n\n**特点：**\n- 开源、透明、可审计\n- 符合开源社区治理最佳实践\n- 支持多列表管理\n\n**2. 邮件列表服务升级历史** [mindspore-discuss@mindspore.cn，2023](https://gitee.com/mindspore/community)\n\n**2023 年升级通知：**\n- 原平台：华为云内部邮件列表\n- 新平台：OpenI 邮件列表服务\n- 升级原因：独立运营、社区治理\n- 迁移时间：2023 年 Q2\n\n**升级影响：**\n- 订阅需重新确认\n- 历史邮件部分迁移\n- 新邮件地址格式\n\n**3. 查看历史邮件存档** [Gitee MindSpore，2024](https://gitee.com/mindspore/community/issues)\n\n**方式一：Gitee Issue 存档**\n```\n访问：https://gitee.com/mindspore/community/issues\n筛选：使用标签或关键词搜索\n例如：\"SIG Meeting\"、\"TSC\"、\"Proposal\"\n```\n\n**方式二：OpenI 平台存档** [OpenI 开源平台，2024](https://openi.org.cn/mindspore/mindspore)\n```\n访问：https://openi.org.cn/mindspore/mindspore/mailman\n选择邮件列表\n浏览或搜索历史邮件\n```\n\n**方式三：邮件客户端搜索**\n- 如果已订阅，可在邮箱中搜索\n- 关键词：\"from:dev@mindspore.cn\"\n\n**4. 主要邮件列表** [MindSpore 社区，2024](https://www.mindspore.cn/community)\n\n| 邮件列表 | 存档位置 | 活跃度 |\n|---------|---------|--------|\n| dev@mindspore.cn | Gitee Issues | 高 |\n| mindspore-tsc@mindspore.cn | Gitee Issues | 中 |\n| mindspore-discuss@mindspore.cn | Gitee Issues | 中 |\n| sig-security@mindspore.cn | Gitee Issues | 低 |\n\n**5. 历史邮件搜索技巧** [Gitee 使用指南，2024](https://gitee.com/help)\n\n**按类型搜索：**\n- 会议通知：\"Meeting\" OR \"例会\"\n- 技术讨论：\"[RFC]\" OR \"[Proposal]\"\n- 发布公告：\"[Announcement]\" OR \"发布\"\n- SIG 相关：\"[SIG-\" \n\n**按时间搜索：**\n- Gitee Issues 可按创建时间排序\n- OpenI 平台可按日期范围筛选\n\n**6. 邮件存档保留政策** [OpenI 邮件列表政策，2024](https://openi.org.cn/policies)\n\n**保留期限：**\n- 技术讨论：永久保留\n- 会议通知：3 年\n- 个人邮件：遵循隐私政策\n\n**隐私保护：**\n- 敏感议题邮件可设为私有\n- 个人邮箱地址可选隐藏\n\n**7. 获取帮助** [MindSpore 社区，2024](https://www.mindspore.cn/community/contact)\n\n**联系方式：**\n- 订阅问题：community@mindspore.cn\n- 技术问题：dev@mindspore.cn\n- OpenI 支持：support@openi.org.cn\n\n**参考来源：**\n- OpenI 邮件列表：https://openi.org.cn/mindspore/mindspore\n- Gitee MindSpore: https://gitee.com/mindspore/community/issues\n- MindSpore 社区：https://www.mindspore.cn/community\n- OpenI 政策：https://openi.org.cn/policies",
+    "citations": [
+      "https://openi.org.cn/mindspore/mindspore",
+      "https://gitee.com/mindspore/community",
+      "https://gitee.com/mindspore/community/issues",
+      "https://www.mindspore.cn/community",
+      "https://gitee.com/help",
+      "https://openi.org.cn/policies"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 6
+  },
+  {
+    "question_id": "q_055",
+    "platform": "qwen",
+    "query": "MindSpore 有哪些邮件列表，它们分别面向什么受众？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore 邮件列表完整列表及受众说明：**\n\n**1. 主要邮件列表** [OpenI 邮件列表，2024](https://openi.org.cn/mindspore/mindspore)\n\n| 邮件列表 | 主要用途 | 目标受众 |\n|---------|---------|----------|\n| dev@mindspore.cn | 技术开发讨论 | 开发者、贡献者、SIG 成员 |\n| mindspore-tsc@mindspore.cn | TSC 技术委员会事务 | TSC 成员、SIG 负责人 |\n| mindspore-discuss@mindspore.cn | 用户讨论与问答 | 普通用户、学习者 |\n\n**2. 各邮件列表详细介绍**\n\n**2.1 dev@mindspore.cn** [Gitee MindSpore，2024](https://gitee.com/mindspore/community)\n**定位：** 核心开发讨论\n\n**适合议题：**\n- 新功能提案（[Proposal]）\n- 技术设计讨论（[RFC]）\n- SIG 会议通知\n- 代码审查相关\n- Bug 报告与修复讨论\n\n**受众：**\n- 核心开发团队成员\n- SIG 参与者\n- 代码贡献者\n- 技术研究者\n\n**2.2 mindspore-tsc@mindspore.cn** [mindspore-tsc 邮件存档，2024](https://gitee.com/mindspore/community)\n**定位：** 技术委员会决策\n\n**适合议题：**\n- TSC 会议议程\n- SIG 成立申请\n- 重大技术决策\n- Committer 提名\n- 治理政策讨论\n\n**受众：**\n- TSC 委员\n- SIG 负责人\n- 社区管理者\n- 特邀观察员\n\n**2.3 mindspore-discuss@mindspore.cn** [MindSpore 社区，2024](https://www.mindspore.cn/community)\n**定位：** 用户交流与互助\n\n**适合议题：**\n- 使用问题咨询\n- 安装部署求助\n- 最佳实践分享\n- 社区活动通知\n- 初学者问题\n\n**受众：**\n- MindSpore 用户\n- 学习者/学生\n- 企业技术选型人员\n- 潜在贡献者\n\n**3. 专项邮件列表** [Gitee MindSpore SIG，2024](https://gitee.com/mindspore/community/issues/6789)\n\n| 邮件列表 | 用途 | 订阅方式 |\n|---------|------|----------|\n| sig-security@mindspore.cn | 安全漏洞报告与响应 | sig-security-join@mindspore.cn |\n| sig-transformers@mindspore.cn | Transformers SIG 讨论 | sig-transformers-join@mindspore.cn |\n| sig-llm-serving@mindspore.cn | LLM 推理服务讨论 | sig-llm-serving-join@mindspore.cn |\n\n**4. 邮件列表服务升级通知** [mindspore-discuss@mindspore.cn，2023](https://gitee.com/mindspore/community)\n\n**2023 年升级：**\n- 原平台：华为云内部服务\n- 新平台：OpenI 邮件列表服务\n- 目的：社区独立运营\n- 影响：需重新订阅\n\n**5. 订阅指南** [OpenI 邮件列表，2024](https://openi.org.cn/mindspore/mindspore)\n\n**订阅方式：**\n```\n发送空邮件至：[列表名]-join@mindspore.cn\n例如：dev-join@mindspore.cn\n\n系统回复确认后，回复确认邮件即可。\n```\n\n**取消订阅：**\n```\n发送空邮件至：[列表名]-leave@mindspore.cn\n例如：dev-leave@mindspore.cn\n```\n\n**6. 邮件列表礼仪** [MindSpore 社区准则，2024](https://gitee.com/mindspore/community/blob/master/code-of-conduct.md)\n\n**最佳实践：**\n- 选择正确的邮件列表\n- 主题清晰具体（使用前缀）\n- 先搜索历史邮件\n- 回复时保留上下文\n- 使用纯文本格式\n\n**7. 存档与搜索** [Gitee MindSpore，2024](https://gitee.com/mindspore/community/issues)\n\n**历史邮件查看：**\n- Gitee Issues: https://gitee.com/mindspore/community/issues\n- OpenI 平台：https://openi.org.cn/mindspore/mindspore/mailman\n\n**参考来源：**\n- OpenI 邮件列表：https://openi.org.cn/mindspore/mindspore\n- Gitee MindSpore: https://gitee.com/mindspore/community\n- MindSpore 社区：https://www.mindspore.cn/community\n- 社区准则：https://gitee.com/mindspore/community/blob/master/code-of-conduct.md",
+    "citations": [
+      "https://openi.org.cn/mindspore/mindspore",
+      "https://gitee.com/mindspore/community",
+      "https://gitee.com/mindspore/community/issues/6789",
+      "https://www.mindspore.cn/community",
+      "https://gitee.com/mindspore/community/blob/master/code-of-conduct.md"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 5
+  },
+  {
+    "question_id": "q_059",
+    "platform": "qwen",
+    "query": "MindSpore 如何通过自动化工具管理社区例会通知？社区采用什么会议平台？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore 社区例会通知管理与会议平台：**\n\n**1. 自动化工具演进** [mindspore-discuss@mindspore.cn，2024](https://gitee.com/mindspore/community)\n\n**历史：MeetingBot 服务（已下线）**\n- 功能：自动发送会议通知、会议纪要\n- 集成：邮件列表 + 微信群 + 日历\n- 下线时间：2024 年中\n- 下线原因：服务升级、维护成本\n\n**当前：手动 + 半自动方式** [dev@mindspore.cn，2024](https://gitee.com/mindspore/community)\n- 会议通知：SIG 负责人手动发送\n- 日历邀请：可选 Google Calendar / 华为日历\n- 会议纪要：志愿者记录并发布\n\n**2. 会议通知发送流程** [MindSpore SIG 章程，2024](https://gitee.com/mindspore/community/blob/master/sig-charter.md)\n\n**Step 1：确定会议时间**\n- 固定例会：SIG 内部约定\n- 临时会议：提前 3-5 天通知\n\n**Step 2：发送通知邮件**\n```\n收件人：dev@mindspore.cn\n主题：[Meeting][SIG-XXX] 会议主题 - 日期\n\n正文：\n- 时间（含时区）\n- 会议平台/链接\n- 议程\n- 参会方式\n```\n\n**Step 3：社区渠道同步**\n- Gitee Issue 创建会议议题\n- 微信公众号推送（重要会议）\n- 微信群通知\n\n**3. 会议平台** [MindSpore 社区，2024](https://www.mindspore.cn/community)\n\n**主要平台：**\n\n| 平台 | 使用场景 | 特点 |\n|------|---------|------|\n| 华为云会议 | TSC 会议、大型活动 | 高清、稳定、支持录制 |\n| 腾讯会议 | SIG 例会 | 普及率高、易用 |\n| 飞书会议 | 内部协调会 | 集成文档协作 |\n\n**会议链接获取：**\n- 会议通知邮件中包含\n- Gitee Issue 中有时也会发布\n\n**4. 会议纪要管理** [Gitee MindSpore，2024](https://gitee.com/mindspore/community/issues)\n\n**纪要发布渠道：**\n- 邮件列表：会后 1-2 天内发送\n- Gitee Issue：创建会议记录 Issue\n- 官网新闻：重大会议决定\n\n**纪要模板：**\n```markdown\n# [SIG-XXX] 会议纪要 - YYYY-MM-DD\n\n## 参会人员\n- [名单]\n\n## 议程回顾\n1. [议题 1] - [结论]\n2. [议题 2] - [结论]\n\n## 行动项\n- [ ] [任务] - @负责人 - [截止日期]\n\n## 下次会议\n- 时间：\n- 议程征集：\n```\n\n**5. 日历集成** [OpenI 邮件列表，2024](https://openi.org.cn/mindspore/mindspore)\n\n**支持的日历服务：**\n- Google Calendar（国际贡献者）\n- 华为日历（国内用户）\n- Outlook（企业用户）\n\n**订阅社区日历：**\n- 部分 SIG 提供公共日历链接\n- 订阅后自动接收会议提醒\n\n**6. 未来自建工具计划** [mindspore-tsc@mindspore.cn，2025](https://gitee.com/mindspore/community)\n\n**规划中：**\n- 基于 LFX Insights 的会议管理\n- 社区日历聚合服务\n- 会议纪要自动归档\n\n**7. 获取会议信息** [MindSpore 社区，2024](https://www.mindspore.cn/community/events)\n\n| 渠道 | 内容 |\n|------|------|\n| 邮件列表 | 会议通知/纪要 |\n| Gitee Issues | 会议议题/记录 |\n| 微信公众号 | 活动预告 |\n| 官网事件页 | 大型活动 |\n\n**参考来源：**\n- mindspore-discuss 邮件存档：https://gitee.com/mindspore/community\n- SIG 章程：https://gitee.com/mindspore/community/blob/master/sig-charter.md\n- MindSpore 社区：https://www.mindspore.cn/community\n- Gitee MindSpore: https://gitee.com/mindspore/community/issues",
+    "citations": [
+      "https://gitee.com/mindspore/community",
+      "https://gitee.com/mindspore/community/blob/master/sig-charter.md",
+      "https://www.mindspore.cn/community",
+      "https://gitee.com/mindspore/community/issues",
+      "https://openi.org.cn/mindspore/mindspore",
+      "https://www.mindspore.cn/community/events"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": ["Google Calendar", "LFX Insights"],
+    "citations_to_official": 6
+  }
+]
