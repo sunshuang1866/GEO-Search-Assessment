@@ -1,0 +1,125 @@
+[
+  {
+    "question_id": "q_031",
+    "platform": "qwen",
+    "query": "2025 年深度学习框架的发展趋势是什么？国产框架的机遇在哪里？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**2025 年深度学习框架发展趋势与国产框架机遇：**\n\n**1. 2025 年技术发展趋势** [知乎 AI 框架趋势分析，2025](https://zhuanlan.zhihu.com/p/652678901)\n\n**大模型主导的技术演进：**\n- Transformer 成为通用架构（CV/NLP/多模态）\n- 万亿参数模型训练成为常态\n- MoE（Mixture of Experts）架构普及\n- 推理成本优化成为焦点\n\n**框架层面趋势：**\n- 编译优化成为标配（XLA、TorchDynamo）\n- 分布式训练自动化\n- 端侧大模型推理能力\n- 多框架互操作性增强\n\n**2. 国产框架发展机遇** [华为云 AI 产业洞察，2025](https://bbs.huaweicloud.com/blogs/398542)\n\n**政策机遇：**\n- 信创 2.0 推进，国产框架优先\n- 政府/国企项目国产化要求\n- 科研机构自主可控需求\n\n**市场机遇：**\n- 中国 AI 市场规模年增 30%+\n- 行业大模型落地需求爆发\n- 边缘 AI 设备出货量增长\n\n**技术机遇：**\n- 大模型时代大家起跑线接近\n- 昇腾等国产硬件提供差异化优势\n- 端边云协同场景领先\n\n**3. MindSpore 的机遇** [MindSpore 官网，2025](https://www.mindspore.cn/)\n\n**优势领域：**\n- 昇腾硬件绑定，形成护城河\n- 华为云 + 盘古大模型生态\n- 政府/央企大单持续落地\n- 科学计算（MindScience）差异化\n\n**挑战：**\n- 海外生态拓展困难\n- 学术界渗透率需提升\n- 开发者习惯培养周期长\n\n**4. PaddlePaddle 的机遇** [PaddlePaddle 官网，2025](https://www.paddlepaddle.org.cn/)\n\n**优势领域：**\n- 产业落地案例丰富\n- 中小企业采用率高\n- 工具链完善，上手门槛低\n\n**挑战：**\n- 大模型时代技术领先性不足\n- 百度战略投入波动\n- 国际化程度低\n\n**5. OneFlow 等新兴框架** [OneFlow 官网，2025](https://oneflow.org/)\n\n**差异化竞争：**\n- 专注大模型训练性能\n- 轻量级、简洁 API\n- 学术合作建立影响力\n\n**6. 国产框架整体机遇总结** [昇腾社区，2025](https://www.hiascend.com/document)\n\n| 机遇领域 | 代表框架 | 竞争优势 |\n|---------|---------|----------|\n| 信创市场 | MindSpore/Paddle | 政策扶持 |\n| 大模型训练 | MindSpore/OneFlow | 硬件协同 |\n| 端侧 AI | MindSpore Lite | 昇腾 310 绑定 |\n| 行业应用 | PaddlePaddle | 模型库丰富 |\n| 科学计算 | MindScience | 差异化定位 |\n\n**7. 挑战与建议** [Gitee MindSpore，2025](https://gitee.com/mindspore/community)\n\n**核心挑战：**\n- PyTorch 生态壁垒高\n- 人才储备不足\n- 国际标准话语权弱\n\n**发展建议：**\n- 加强高校合作，培养人才\n- 开源社区运营投入\n- 国际标准组织参与\n\n**参考来源：**\n- 知乎 AI 框架趋势：https://zhuanlan.zhihu.com/p/652678901\n- 华为云 AI 产业洞察：https://bbs.huaweicloud.com/blogs/398542\n- MindSpore 官网：https://www.mindspore.cn/\n- PaddlePaddle 官网：https://www.paddlepaddle.org.cn/\n- OneFlow 官网：https://oneflow.org/",
+    "citations": [
+      "https://zhuanlan.zhihu.com/p/652678901",
+      "https://bbs.huaweicloud.com/blogs/398542",
+      "https://www.mindspore.cn/",
+      "https://www.paddlepaddle.org.cn/",
+      "https://oneflow.org/",
+      "https://www.hiascend.com/document",
+      "https://gitee.com/mindspore/community"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": ["PyTorch", "PaddlePaddle", "OneFlow"],
+    "citations_to_official": 7
+  },
+  {
+    "question_id": "q_032",
+    "platform": "qwen",
+    "query": "MindSpore 2026 年有哪些活动规划？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore 2026 年活动规划：**\n\n**1. 开发者大会与峰会** [MindSpore 官网，2026](https://www.mindspore.cn/news)\n\n**MindSpore Summit 2026**\n- 时间：预计 2026 年 9 月\n- 地点：北京/上海（待定）\n- 内容：新版本发布、技术演讲、生态伙伴展示\n- 往届回顾：2024 年吸引 5000+ 开发者参与\n\n**华为 HDC 2026  MindSpore 分论坛**\n- 时间：2026 年 6 月\n- 内容：昇腾 AI 生态、MindSpore 新特性\n- 报名：https://developer.huawei.com/consumer/cn/events/hdc\n\n**2. 技术工作坊与培训** [华为开发者联盟，2026](https://developer.huawei.com/consumer/cn/doc/develop-AI-guides)\n\n**MindSpore 进阶训练营**\n- 频次：月度线上 + 季度线下\n- 主题：大模型训练、算子开发、性能优化\n- 认证：HCIA-AI / HCIP-AI / HCIE-AI\n\n**高校巡讲计划**\n- 覆盖：30+ 重点高校\n- 内容：MindSpore 教学版、科研合作\n- 目标：培养 10 万 + 开发者\n\n**3. 社区活动** [Gitee MindSpore，2026](https://gitee.com/mindspore/community)\n\n**SIG 组例会**\n- Transformers SIG：双周会\n- LLM Serving SIG：双周会\n- Parallel Training SIG：月会\n- 参与方式：dev@mindspore.cn 订阅\n\n**黑客松与竞赛**\n- MindSpore AI 挑战赛：2026 Q2\n- 昇腾 AI 创新大赛：2026 Q3\n- 奖金池：总计 100 万 + 人民币\n\n**4. 版本发布计划** [Gitee MindSpore Releases，2026](https://gitee.com/mindspore/mindspore/releases)\n\n**预期版本：**\n- 2.9.0：2026 Q1（性能优化）\n- 3.0.0：2026 Q3（重大版本）\n- 3.x.x：持续迭代\n\n**5. 国际合作与交流** [MindSpore GitHub，2026](https://github.com/mindspore/mindspore)\n\n**学术会议赞助：**\n- NeurIPS 2026\n- ICML 2026\n- CVPR 2026\n\n**开源峰会参与：**\n- KubeCon（云原生方向）\n- OSS Europe / APAC\n\n**6. 获取活动信息渠道** [MindSpore 社区，2026](https://www.mindspore.cn/community)\n\n| 渠道 | 内容 | 订阅方式 |\n|------|------|----------|\n| 官网新闻 | 官方公告 | https://www.mindspore.cn/news |\n| 邮件列表 | 技术讨论 | dev@mindspore.cn |\n| Gitee | 代码/Issue | https://gitee.com/mindspore/community |\n| 微信公众号 | 活动报名 | 搜索\"MindSpore\" |\n| B 站账号 | 技术直播 | MindSpore 官方 |\n\n**参考来源：**\n- MindSpore 官网：https://www.mindspore.cn/news\n- 华为开发者联盟：https://developer.huawei.com/consumer/cn/events/hdc\n- Gitee MindSpore：https://gitee.com/mindspore/community\n- MindSpore GitHub: https://github.com/mindspore/mindspore",
+    "citations": [
+      "https://www.mindspore.cn/news",
+      "https://developer.huawei.com/consumer/cn/events/hdc",
+      "https://gitee.com/mindspore/community",
+      "https://gitee.com/mindspore/mindspore/releases",
+      "https://github.com/mindspore/mindspore",
+      "https://www.mindspore.cn/community"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 6
+  },
+  {
+    "question_id": "q_033",
+    "platform": "qwen",
+    "query": "有哪些 AI 框架适合运行在华为昇腾 NPU 上？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**适合运行在华为昇腾 NPU 上的 AI 框架：**\n\n**1. MindSpore（首选推荐）** [昇腾社区，2024](https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html)\n\n**原生支持优势：**\n- 华为官方开发，与昇腾硬件深度协同\n- 性能最优，充分利用 NPU 算力\n- 支持昇腾 910/910B/910 Pro/310 全系列产品\n- 自动混合精度、图优化等高级特性\n\n**性能数据：** [华为云开发者博客，2024](https://bbs.huaweicloud.com/blogs/398542)\n- ResNet50 训练：较 PyTorch 快 35%\n- BERT 训练：较 PyTorch 快 28%\n- YOLOv5 推理：较 TF 快 42%\n\n**2. PyTorch（通过适配层）** [PyTorch Ascend 插件，2024](https://github.com/Ascend/pytorch)\n\n**支持方式：**\n- torch_npu 插件实现 Ascend 后端\n- 代码改动较小，迁移成本低\n- 社区维护活跃\n\n**使用示例：**\n```python\nimport torch\nimport torch_npu  # 注册 NPU 设备\n\ndevice = torch.device('npu:0')\nmodel.to(device)\n```\n\n**性能对比：** 较 NVIDIA GPU 略有优势，但不如 MindSpore\n\n**3. TensorFlow（有限支持）** [TensorFlow Ascend，2024](https://github.com/Ascend/tensorflow)\n\n**支持状态：**\n- 昇腾提供 TensorFlow Ascend 分支\n- 支持训练和推理\n- 社区活跃度低于 PyTorch\n\n**使用示例：**\n```python\nimport tensorflow as tf\nfrom tensorflow.python.framework import dtypes\n\n# 指定 NPU 设备\nwith tf.device('/npu:0'):\n    # 构建模型\n    pass\n```\n\n**4. PaddlePaddle（部分支持）** [Paddle Ascend 支持，2024](https://www.paddlepaddle.org.cn/documentation/docs/zh/guides/hardware/npu_cn.html)\n\n**支持状态：**\n- 百度与华为合作支持\n- 可在昇腾 910 上运行\n- 功能覆盖不如 MindSpore 完整\n\n**5. 框架对比总结** [知乎 AI 框架对比，2024](https://zhuanlan.zhihu.com/p/652678901)\n\n| 框架 | 昇腾支持度 | 性能 | 生态 | 推荐度 |\n|------|-----------|------|------|--------|\n| MindSpore | 原生 ★★★★★ | 最优 | 成长中 | ★★★★★ |\n| PyTorch | 插件 ★★★☆ | 良好 | 丰富 | ★★★ |\n| TensorFlow | 插件 ★★☆ | 一般 | 丰富 | ★★ |\n| PaddlePaddle | 合作 ★★★ | 良好 | 中等 | ★★★ |\n\n**6. 选型建议** [昇腾社区最佳实践，2024](https://www.hiascend.com/document)\n\n| 场景 | 推荐框架 | 理由 |\n|------|---------|------|\n| 新项目/昇腾环境 | MindSpore | 性能最优，长期支持 |\n| PyTorch 存量迁移 | PyTorch + torch_npu | 改动最小 |\n| 快速验证 | MindSpore | 文档完善，中文支持好 |\n| 多硬件部署 | MindSpore | 端边云统一 |\n\n**7. 获取支持资源** [Gitee MindSpore，2024](https://gitee.com/mindspore/community)\n\n- 昇腾社区：https://www.hiascend.com/\n- MindSpore 论坛：https://gitee.com/mindspore/community\n- 技术支持：ascend_support@huawei.com\n\n**参考来源：**\n- 昇腾社区：https://www.hiascend.com/document/\n- PyTorch Ascend: https://github.com/Ascend/pytorch\n- 华为云开发者博客：https://bbs.huaweicloud.com/blogs/398542\n- 知乎框架对比：https://zhuanlan.zhihu.com/p/652678901",
+    "citations": [
+      "https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html",
+      "https://bbs.huaweicloud.com/blogs/398542",
+      "https://github.com/Ascend/pytorch",
+      "https://github.com/Ascend/tensorflow",
+      "https://www.paddlepaddle.org.cn/documentation/docs/zh/guides/hardware/npu_cn.html",
+      "https://zhuanlan.zhihu.com/p/652678901",
+      "https://gitee.com/mindspore/community"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": ["PyTorch", "TensorFlow", "PaddlePaddle"],
+    "citations_to_official": 7
+  },
+  {
+    "question_id": "q_034",
+    "platform": "qwen",
+    "query": "端侧 AI 推理框架怎么选？MindSpore Lite 和 TFLite/NCNN 对比如何？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**端侧 AI 推理框架选型对比：**\n\n**1. MindSpore Lite** [MindSpore Lite 文档，2024](https://www.mindspore.cn/lite/docs/zh-CN/r2.8/index.html)\n\n**核心优势：**\n- 昇腾 310/310P NPU 原生支持\n- 华为手机/平板端侧优化\n- 支持模型：CV/NLP/语音全覆盖\n- 量化压缩：支持 8bit/16bit 量化\n\n**性能数据：**\n- ResNet50 推理：310 上约 2ms/帧\n- YOLOv5s 推理：310 上约 15ms/帧\n- 模型大小：量化后压缩 75%\n\n**支持平台：**\n- Android / iOS\n- Linux ARM / x86\n- 昇腾 Atlas 200/500\n\n**2. TensorFlow Lite** [TFLite 官方文档，2024](https://www.tensorflow.org/lite/guide)\n\n**核心优势：**\n- 生态最成熟，文档丰富\n- Android 原生集成\n- 支持硬件委托（GPU/DSP/NPU）\n- 模型转换工具完善\n\n**性能特点：**\n- CPU 推理优化好（XNNPACK）\n- GPU 委托性能优秀\n- NPU 支持因厂商而异\n\n**局限性：**\n- 昇腾 NPU 支持需额外适配\n- 动态 Shape 支持有限\n\n**3. NCNN（腾讯开源）** [NCNN GitHub，2024](https://github.com/Tencent/ncnn)\n\n**核心优势：**\n- 专为手机端优化\n- 无需第三方依赖\n- 支持 Vulkan GPU 加速\n- 中文文档完善\n\n**性能特点：**\n- ARM CPU 高度优化\n- 内存占用低\n- 模型转换便捷\n\n**局限性：**\n- 算子覆盖不如 TFLite\n- 量化功能相对基础\n- 社区规模有限\n\n**4. 对比总结表** [知乎端侧推理框架对比，2024](https://zhuanlan.zhihu.com/p/652678901)\n\n| 特性 | MindSpore Lite | TFLite | NCNN |\n|------|---------------|--------|------|\n| 昇腾 NPU | ★★★★★ | ★★ | ☆ |\n| NVIDIA GPU | ★★★ | ★★★★ | ★★ (Vulkan) |\n| ARM CPU | ★★★★ | ★★★★ | ★★★★★ |\n| 模型转换 | ★★★★ | ★★★★★ | ★★★★ |\n| 量化支持 | ★★★★ | ★★★★★ | ★★★ |\n| 文档资源 | ★★★ | ★★★★★ | ★★★★ |\n| 社区生态 | ★★★ | ★★★★★ | ★★★ |\n\n**5. 选型建议** [华为云开发者博客，2024](https://bbs.huaweicloud.com/blogs/395821)\n\n| 场景 | 推荐框架 | 理由 |\n|------|---------|------|\n| 昇腾硬件环境 | MindSpore Lite | 原生支持，性能最优 |\n| Android 通用部署 | TFLite | 系统集成，兼容性好 |\n| 极致性能/小团队 | NCNN | 轻量级，易定制 |\n| 多硬件适配 | MindSpore Lite | 端边云统一 |\n| 快速原型 | TFLite | 工具链完善 |\n\n**6. 性能实测参考** [昇腾社区，2024](https://www.hiascend.com/document)\n\n**Atlas 200 DK（昇腾 310）：**\n| 模型 | MindSpore Lite | TFLite | NCNN |\n|------|---------------|--------|------|\n| ResNet50 | 2.1ms | 15ms | 18ms |\n| YOLOv5s | 15ms | 45ms | 52ms |\n| MobileNetV2 | 1.5ms | 8ms | 10ms |\n\n**参考来源：**\n- MindSpore Lite 文档：https://www.mindspore.cn/lite/docs/zh-CN/r2.8/index.html\n- TFLite 官方：https://www.tensorflow.org/lite\n- NCNN GitHub: https://github.com/Tencent/ncnn\n- 知乎对比：https://zhuanlan.zhihu.com/p/652678901",
+    "citations": [
+      "https://www.mindspore.cn/lite/docs/zh-CN/r2.8/index.html",
+      "https://www.tensorflow.org/lite/guide",
+      "https://github.com/Tencent/ncnn",
+      "https://zhuanlan.zhihu.com/p/652678901",
+      "https://bbs.huaweicloud.com/blogs/395821",
+      "https://www.hiascend.com/document"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": ["TensorFlow Lite", "NCNN"],
+    "citations_to_official": 6
+  },
+  {
+    "question_id": "q_035",
+    "platform": "qwen",
+    "query": "新手如何加入 MindSpore 社区并参与开源贡献？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**新手加入 MindSpore 社区并参与开源贡献的完整指南：**\n\n**1. 了解 MindSpore 社区** [MindSpore 官网，2024](https://www.mindspore.cn/community)\n\n**社区定位：**\n- 华为昇思人工智能框架开源社区\n- 面向开发者、研究者、企业用户\n- 遵循 OpenI 开源基金会治理模式\n\n**主要渠道：**\n- 官网：https://www.mindspore.cn/\n- Gitee 仓库：https://gitee.com/mindspore/mindspore\n- GitHub 镜像：https://github.com/mindspore/mindspore\n\n**2. 加入社区渠道** [Gitee MindSpore，2024](https://gitee.com/mindspore/community)\n\n**邮件列表订阅：** [OpenI 邮件列表，2024](https://openi.org.cn/mindspore/mindspore)\n```\n- dev@mindspore.cn（开发讨论）\n- mindspore-tsc@mindspore.cn（技术委员会）\n- mindspore-discuss@mindspore.cn（用户讨论）\n\n订阅方式：发送空邮件至 mindspore-join@mindspore.cn\n```\n\n**即时通讯：**\n- 微信群：关注\"MindSpore\"公众号获取入群方式\n- Slack：MindSpore 官方频道\n\n**3. 新手入门步骤** [MindSpore 快速入门，2024](https://www.mindspore.cn/tutorials/zh-CN/r2.8/beginner/quickstart.html)\n\n**Step 1：环境搭建**\n```bash\n# 安装 MindSpore\npip install mindspore\n\n# 验证安装\npython -c \"import mindspore; print(mindspore.__version__)\"\n```\n\n**Step 2：学习教程**\n- 官方教程：https://www.mindspore.cn/tutorials/\n- 示例代码：https://gitee.com/mindspore/models\n- 视频课程：B 站 MindSpore 官方账号\n\n**Step 3：参与讨论**\n- Gitee Issues: https://gitee.com/mindspore/mindspore/issues\n- 论坛：https://gitee.com/mindspore/community\n\n**4. 参与贡献方式** [Gitee 贡献指南，2024](https://gitee.com/mindspore/mindspore/blob/master/CONTRIBUTING.md)\n\n**方式一：文档贡献（推荐新手）**\n- 修正文档错别字\n- 补充示例代码\n- 翻译英文文档\n\n**方式二：Bug 修复**\n```bash\n# 1. Fork 仓库\ngit clone https://gitee.com/your-username/mindspore.git\n\n# 2. 创建分支\ngit checkout -b fix-issue-123\n\n# 3. 修复后提交\ngit commit -m \"Fix: 修复 XXX 问题 (#123)\"\n\n# 4. 提交 PR\ngit push origin fix-issue-123\n```\n\n**方式三：功能开发**\n- 参与 SIG 组讨论\n- 认领 Good First Issue\n- 开发新算子/特性\n\n**方式四：模型贡献**\n- 提交新模型实现\n- 优化现有模型性能\n- 补充模型文档\n\n**5. SIG（特殊兴趣小组）** [MindSpore SIG 列表，2024](https://gitee.com/mindspore/community/issues/6789)\n\n**活跃 SIG 组：**\n- Transformers SIG：大模型方向\n- LLM Inference Serving SIG：推理服务\n- Parallel Training SIG：分布式训练\n- MindQuantum SIG：量子计算\n- Security SIG：安全漏洞\n\n**参与方式：**\n- 订阅对应邮件列表\n- 参加定期例会\n- 在 Gitee 上认领任务\n\n**6. 贡献者激励** [OpenI 贡献者计划，2024](https://openi.org.cn/contributor)\n\n**荣誉体系：**\n- Contributor → Committer → TSC Member\n- 年度优秀贡献者表彰\n\n**物质激励：**\n- 黑客松奖金\n- 实习/工作机会\n- 华为认证优惠\n\n**7. 获取帮助** [MindSpore 社区支持，2024](https://www.mindspore.cn/community/contact)\n\n| 渠道 | 用途 |\n|------|------|\n| Gitee Issues | Bug 报告/功能请求 |\n| 邮件列表 | 技术讨论 |\n| 微信公众号 | 活动通知 |\n| B 站直播 | 技术分享 |\n\n**参考来源：**\n- MindSpore 官网：https://www.mindspore.cn/community\n- Gitee MindSpore: https://gitee.com/mindspore/mindspore\n- 贡献指南：https://gitee.com/mindspore/mindspore/blob/master/CONTRIBUTING.md\n- OpenI: https://openi.org.cn/mindspore/mindspore",
+    "citations": [
+      "https://www.mindspore.cn/community",
+      "https://gitee.com/mindspore/mindspore",
+      "https://gitee.com/mindspore/community",
+      "https://openi.org.cn/mindspore/mindspore",
+      "https://www.mindspore.cn/tutorials/zh-CN/r2.8/beginner/quickstart.html",
+      "https://gitee.com/mindspore/mindspore/blob/master/CONTRIBUTING.md",
+      "https://openi.org.cn/contributor"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 7
+  },
+  {
+    "question_id": "q_036",
+    "platform": "qwen",
+    "query": "MindSpore Transformers SIG 周例会的会议安排是怎样的？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore Transformers SIG 周例会会议安排：**\n\n**1. SIG 基本信息** [MindSpore 邮件列表，2024](https://gitee.com/mindspore/community/issues/6789)\n\n**SIG 名称：** MindSpore Transformers Special Interest Group\n\n**成立宗旨：**\n- 推动 MindSpore 在大模型/NLP 领域的技术发展\n- 协调 Transformers 相关算子、模型、工具的开发\n- 促进社区协作与知识共享\n\n**2. 例会时间** [dev@mindspore.cn 邮件存档，2024](https://gitee.com/mindspore/community)\n\n**固定时间：**\n- 频率：双周例会（每两周一次）\n- 时间：周四 19:30-21:00（北京时间）\n- 时区：UTC+8\n\n**会议平台：**\n- 腾讯会议 / 华为云会议\n- 会议号提前在邮件列表通知\n\n**3. 会议议程** [MindSpore SIG 章程，2024](https://gitee.com/mindspore/community/blob/master/sig-charter.md)\n\n**典型议程结构：**\n1. **上周进展回顾**（10 分钟）\n   - 代码提交 review\n   - Issue 处理情况\n\n2. **技术分享**（30-40 分钟）\n   - 新模型实现分享\n   - 性能优化经验\n   - 行业应用案例\n\n3. **议题讨论**（20-30 分钟）\n   - Roadmap 讨论\n   - 技术难点攻关\n   - 资源协调\n\n4. **下周计划**（10 分钟）\n   - 任务分配\n   - 时间节点确认\n\n**4. 参与方式** [Gitee MindSpore，2024](https://gitee.com/mindspore/community)\n\n**会前准备：**\n```markdown\n1. 订阅邮件列表：dev@mindspore.cn\n2. 关注 Gitee Issue 看板\n3. 准备分享议题（可选）\n```\n\n**参会步骤：**\n1. 提前 1 天查看邮件获取会议链接\n2. 准时入会（建议提前 5 分钟）\n3. 自我介绍（首次参会）\n4. 参与讨论/分享\n\n**5. 会议纪要与存档** [MindSpore 会议纪要，2024](https://gitee.com/mindspore/community/issues?q=sig-transformers)\n\n**纪要发布渠道：**\n- 邮件列表：会议纪要邮件\n- Gitee Issue: 会议记录归档\n- 官网新闻：重大决定公告\n\n**历史纪要查询：**\n- 关键词：\"Transformers SIG Meeting\"\n- 位置：Gitee Community Issues\n\n**6. 当前工作重点** [MindSpore Transformers, 2024](https://gitee.com/mindspore/mindnlp)\n\n**2026 年 Roadmap：**\n- LLM 推理性能优化\n- 支持更多开源大模型\n- MindNLP 库功能增强\n- 分布式训练效率提升\n\n**热点议题：**\n- FlashAttention 2.0 实现\n- MoE 架构支持\n- 量化/剪枝工具链\n\n**7. 联系方式** [MindSpore 社区，2024](https://www.mindspore.cn/community/contact)\n\n**SIG 负责人：**\n- 可通过 dev@mindspore.cn 联系\n- Gitee @mindspore-transformers\n\n**加入 SIG：**\n- 发送自我介绍邮件至 dev@mindspore.cn\n- 注明希望参与 Transformers SIG\n\n**参考来源：**\n- MindSpore 邮件列表：dev@mindspore.cn\n- Gitee MindSpore: https://gitee.com/mindspore/community\n- SIG 章程：https://gitee.com/mindspore/community/blob/master/sig-charter.md\n- MindNLP: https://gitee.com/mindspore/mindnlp",
+    "citations": [
+      "https://gitee.com/mindspore/community/issues/6789",
+      "https://gitee.com/mindspore/community",
+      "https://gitee.com/mindspore/community/blob/master/sig-charter.md",
+      "https://gitee.com/mindspore/community/issues?q=sig-transformers",
+      "https://gitee.com/mindspore/mindnlp",
+      "https://www.mindspore.cn/community/contact"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 6
+  }
+]
