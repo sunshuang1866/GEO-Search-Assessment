@@ -1,0 +1,145 @@
+[
+  {
+    "question_id": "q_038",
+    "platform": "qwen",
+    "query": "MindSpore 的 LLM Inference Serving SIG 是做什么的，多久开一次例会？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore LLM Inference Serving SIG 介绍：**\n\n**1. SIG 基本信息** [MindSpore 邮件列表，2024](https://gitee.com/mindspore/community/issues/6789)\n\n**SIG 名称：** LLM Inference Serving Special Interest Group\n\n**成立宗旨：**\n- 专注于大语言模型（LLM）的推理服务化\n- 优化 MindSpore 在大模型推理场景的性能\n- 构建完善的推理服务生态工具链\n\n**2. 工作重点** [MindSpore Serving 文档，2024](https://www.mindspore.cn/serving/docs/zh-CN/r2.8/index.html)\n\n**核心技术方向：**\n- **推理引擎优化**：Continuous batching、PagedAttention\n- **服务化框架**：REST/gRPC API、流式输出\n- **模型支持**：LLaMA、ChatGLM、Baichuan 等主流大模型\n- **性能优化**：KV Cache 管理、动态 Batch 推理\n- **部署方案**：单卡/多卡/分布式部署\n\n**3. 例会安排** [dev@mindspore.cn 邮件存档，2024](https://gitee.com/mindspore/community)\n\n**会议频率：双周例会**\n\n**典型时间：**\n- 时间：周三 19:30-21:00（北京时间）\n- 平台：腾讯会议 / 华为云会议\n- 会议号：提前在邮件列表通知\n\n**议程结构：**\n1. 进展回顾（15 分钟）\n2. 技术分享（30-40 分钟）\n3. 议题讨论（20-30 分钟）\n4. 下周计划（10 分钟）\n\n**4. 当前 Roadmap** [Gitee MindSpore，2024](https://gitee.com/mindspore/community/issues?q=sig-llm)\n\n**2026 年重点：**\n- vLLM 后端支持\n- 多模型路由服务\n- 推理成本优化\n- AIGC 应用赋能\n\n**5. 参与方式** [MindSpore 社区，2024](https://www.mindspore.cn/community)\n\n**参与步骤：**\n1. 订阅邮件列表：dev@mindspore.cn\n2. 发送自我介绍邮件\n3. 参加双周例会\n4. 认领 Gitee Issue\n\n**联系方式：**\n- 邮件：dev@mindspore.cn\n- Gitee: @mindspore-serving\n\n**6. 相关资源** [昇腾社区，2024](https://www.hiascend.com/document)\n\n- MindSpore Serving 文档：https://www.mindspore.cn/serving/\n- 大模型推理最佳实践：https://www.hiascend.com/document/\n\n**参考来源：**\n- MindSpore 邮件列表：dev@mindspore.cn\n- MindSpore Serving 文档：https://www.mindspore.cn/serving/docs/zh-CN/r2.8/index.html\n- Gitee MindSpore: https://gitee.com/mindspore/community\n- 昇腾社区：https://www.hiascend.com/document/",
+    "citations": [
+      "https://gitee.com/mindspore/community/issues/6789",
+      "https://www.mindspore.cn/serving/docs/zh-CN/r2.8/index.html",
+      "https://gitee.com/mindspore/community",
+      "https://gitee.com/mindspore/community/issues?q=sig-llm",
+      "https://www.mindspore.cn/community",
+      "https://www.hiascend.com/document/"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": ["vLLM", "LLaMA", "ChatGLM", "Baichuan"],
+    "citations_to_official": 6
+  },
+  {
+    "question_id": "q_040",
+    "platform": "qwen",
+    "query": "MindSpore Parallel Training System SIG 的工作范围是什么？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore Parallel Training System SIG 工作范围：**\n\n**1. SIG 基本信息** [MindSpore 邮件列表，2024](https://gitee.com/mindspore/community/issues/6789)\n\n**SIG 名称：** Parallel Training System Special Interest Group\n\n**定位：** 专注于分布式并行训练系统架构与优化\n\n**2. 核心工作范围** [MindSpore 并行训练文档，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/advanced/parallel.html)\n\n**2.1 数据并行（Data Parallel）**\n- 梯度聚合优化\n- 通信压缩算法\n- 大规模集群适配\n\n**2.2 模型并行（Model Parallel）**\n- 张量并行（Tensor Parallel）\n- 流水线并行（Pipeline Parallel）\n- 混合并行策略\n\n**2.3 自动并行（Auto Parallel）**\n- 切分策略自动搜索\n- 代价模型优化\n- 半自动并行模式\n\n**2.4 通信优化** [昇腾社区，2024](https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html)\n- AllReduce/AllGather 优化\n- 通信计算重叠\n- 梯度融合技术\n\n**3. 例会安排** [dev@mindspore.cn 邮件存档，2024](https://gitee.com/mindspore/community)\n\n**会议频率：月例会**\n\n**典型时间：**\n- 时间：每月最后一个周二 19:30-21:00\n- 平台：华为云会议\n- 会议号：邮件列表通知\n\n**4. 技术成果** [Gitee MindSpore，2024](https://gitee.com/mindspore/mindspore)\n\n**已实现特性：**\n- 自动混合并行\n- 千亿参数模型支持\n- MoE 分布式训练\n- 弹性训练（Elastic Training）\n\n**性能数据：**\n- 千卡集群效率：90%+ 线性加速比\n- 万亿参数模型：端到端训练效率提升 35%\n\n**5. 2026 年 Roadmap** [MindSpore 社区，2024](https://www.mindspore.cn/community)\n\n**重点方向：**\n- 万卡集群支持\n- 异构计算并行\n- 绿色 AI（能效优化）\n- 云原生分布式训练\n\n**6. 参与方式** [Gitee MindSpore，2024](https://gitee.com/mindspore/community)\n\n**联系方式：**\n- 邮件列表：dev@mindspore.cn\n- Gitee Issue 看板\n- SIG 负责人：@mindspore-parallel\n\n**参考来源：**\n- MindSpore 邮件列表：dev@mindspore.cn\n- MindSpore 并行训练文档：https://www.mindspore.cn/docs/zh-CN/r2.8/advanced/parallel.html\n- 昇腾社区：https://www.hiascend.com/document/\n- Gitee MindSpore: https://gitee.com/mindspore/mindspore",
+    "citations": [
+      "https://gitee.com/mindspore/community/issues/6789",
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/advanced/parallel.html",
+      "https://www.hiascend.com/document/detail/zh/mindspore-home/mindspore-fanshe/mindspore-fanshe-001/mindspore-fanshe-001-001-001-001.html",
+      "https://gitee.com/mindspore/community",
+      "https://gitee.com/mindspore/mindspore",
+      "https://www.mindspore.cn/community"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 6
+  },
+  {
+    "question_id": "q_041",
+    "platform": "qwen",
+    "query": "MindSpore MindQuantum SIG 的职责和活动是什么？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore MindQuantum SIG 职责和活动：**\n\n**1. SIG 基本信息** [MindSpore 邮件列表，2024](https://gitee.com/mindspore/community/issues/6789)\n\n**SIG 名称：** MindQuantum Special Interest Group\n\n**定位：** 量子计算与经典 AI 融合的开源社区\n\n**2. 核心职责** [MindQuantum 文档，2024](https://www.mindspore.cn/mindquantum/docs/zh-CN/r0.9/index.html)\n\n**2.1 量子机器学习算法**\n- 变分量子线路（VQC）\n- 量子神经网络（QNN）\n- 量子经典混合训练\n\n**2.2 量子线路模拟**\n- 量子线路构建与可视化\n- 量子态演化模拟\n- 噪声模型支持\n\n**2.3 硬件对接**\n- 对接本源量子等国产量子计算机\n- 量子真机实验支持\n- 混合量子经典计算\n\n**2.4 教育与科普**\n- 量子计算教程\n- 高校合作课程\n- 开源社区建设\n\n**3. MindQuantum 核心功能** [Gitee MindQuantum，2024](https://gitee.com/mindspore/mindquantum)\n\n```python\n# 量子线路示例\nfrom mindquantum import Circuit, H, X, Measure\n\n# 构建量子线路\ncircuit = Circuit()\ncircuit += H.on(0)  # Hadamard 门\ncircuit += X.on(1, 0)  # CNOT 门\ncircuit += Measure.on([0, 1])\n\n# 与 MindSpore 集成\nimport mindspore as ms\nfrom mindquantum import Simulator\n\nsim = Simulator('projectq', 2)\nresult = sim.get_qs()\n```\n\n**4. 例会安排** [dev@mindspore.cn 邮件存档，2024](https://gitee.com/mindspore/community)\n\n**会议频率：月例会**\n\n**典型时间：**\n- 时间：每月第二周周四 19:30-21:00\n- 平台：腾讯会议\n- 会议号：邮件列表通知\n\n**5. 2026 年活动计划** [MindSpore 社区，2024](https://www.mindspore.cn/community)\n\n**技术活动：**\n- 量子计算夏令营\n- 量子 ML 黑客松\n- 高校巡回讲座\n\n**技术方向：**\n- 量子优势验证\n- 大规模量子线路模拟\n- 量子化学应用（MindChemistry）\n\n**6. 参与方式** [Gitee MindQuantum，2024](https://gitee.com/mindspore/mindquantum)\n\n**联系方式：**\n- 邮件列表：dev@mindspore.cn\n- Gitee 仓库：https://gitee.com/mindspore/mindquantum\n- SIG 负责人：@mindspore-quantum\n\n**入门资源：**\n- 量子计算入门教程\n- 示例代码库\n- 视频课程（B 站）\n\n**7. 合作生态** [本源量子，2024](https://www.originquantum.com/)\n\n**合作伙伴：**\n- 本源量子\n- 中科院量子信息实验室\n- 清华大学量子信息中心\n\n**参考来源：**\n- MindSpore 邮件列表：dev@mindspore.cn\n- MindQuantum 文档：https://www.mindspore.cn/mindquantum/docs/zh-CN/r0.9/index.html\n- Gitee MindQuantum: https://gitee.com/mindspore/mindquantum\n- 本源量子：https://www.originquantum.com/",
+    "citations": [
+      "https://gitee.com/mindspore/community/issues/6789",
+      "https://www.mindspore.cn/mindquantum/docs/zh-CN/r0.9/index.html",
+      "https://gitee.com/mindspore/mindquantum",
+      "https://gitee.com/mindspore/community",
+      "https://www.mindspore.cn/community",
+      "https://www.originquantum.com/"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 6
+  },
+  {
+    "question_id": "q_043",
+    "platform": "qwen",
+    "query": "如何向 MindSpore TSC 申请成立新的 SIG？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**向 MindSpore TSC 申请成立新 SIG 的完整流程：**\n\n**1. 了解 SIG 和 TSC** [MindSpore 治理文档，2024](https://gitee.com/mindspore/community/blob/master/governance.md)\n\n**TSC（Technical Steering Committee）：**\n- 技术指导委员会\n- 负责技术方向和重大决策\n- 邮件：mindspore-tsc@mindspore.cn\n\n**SIG（Special Interest Group）：**\n- 特殊兴趣小组\n- 聚焦特定技术方向\n- 社区协作的基本单元\n\n**2. 申请条件** [MindSpore SIG 章程，2024](https://gitee.com/mindspore/community/blob/master/sig-charter.md)\n\n**基本要求：**\n- 明确的技术方向和工作范围\n- 至少 2 名发起人（需为社区 Contributor）\n- 初步的 Roadmap 和行动计划\n- 承诺定期召开例会\n\n**3. 申请流程** [mindspore-tsc@mindspore.cn 邮件存档，2024](https://gitee.com/mindspore/community)\n\n**Step 1：准备提案**\n```markdown\n# SIG 提案模板\n\n## SIG 名称\n[英文全称] Special Interest Group\n\n## 宗旨和目标\n[描述 SIG 的核心使命]\n\n## 工作范围\n- [具体工作领域 1]\n- [具体工作领域 2]\n\n## 发起人\n- [姓名]，[GitHub/Gitee ID]，[所属机构]\n- [姓名]，[GitHub/Gitee ID]，[所属机构]\n\n## 初步 Roadmap\n- Q1: [目标]\n- Q2: [目标]\n\n## 例会安排\n- 频率：[周/双周/月]\n- 时间：[建议时间]\n```\n\n**Step 2：邮件列表讨论** [OpenI 邮件列表，2024](https://openi.org.cn/mindspore/mindspore)\n```\n收件人：dev@mindspore.cn\n抄送：mindspore-tsc@mindspore.cn\n主题：[RFC] Proposal to establish [SIG 名称]\n\n正文：附上 SIG 提案\n```\n\n**Step 3：TSC 评审** [MindSpore TSC 章程，2024](https://gitee.com/mindspore/community/blob/master/tsc-charter.md)\n- TSC 在月度会议上讨论\n- 可能需要补充信息或修改\n- 投票表决（简单多数通过）\n\n**Step 4：正式成立**\n- TSC 批复邮件\n- 创建 Gitee Issue 看板\n- 建立邮件列表别名\n- 首次例会通知\n\n**4. 已成立 SIG 参考** [Gitee MindSpore，2024](https://gitee.com/mindspore/community/issues/6789)\n\n| SIG 名称 | 成立年份 | 活跃程度 |\n|---------|---------|----------|\n| Transformers SIG | 2022 | 非常活跃 |\n| LLM Inference Serving SIG | 2023 | 活跃 |\n| Parallel Training System SIG | 2021 | 活跃 |\n| MindQuantum SIG | 2021 | 活跃 |\n| Security SIG | 2022 | 中等 |\n\n**5. 成功案例参考** [mindspore-tsc@mindspore.cn，2022](https://gitee.com/mindspore/community)\n\n**Usability SIG 申请示例：**\n- 发起人：3 名社区核心贡献者\n- 方向：开发者体验、文档、工具链\n- 通过时间：2 周邮件列表讨论 + TSC 投票\n\n**6. 后续义务** [MindSpore 社区治理，2024](https://www.mindspore.cn/community)\n\n**SIG 持续运营要求：**\n- 定期例会（至少双月一次）\n- 会议纪要公开\n- 年度工作总结\n- 参与社区活动\n\n**7. 获取帮助** [MindSpore 社区，2024](https://www.mindspore.cn/community/contact)\n\n**联系方式：**\n- TSC 邮件：mindspore-tsc@mindspore.cn\n- 社区运营：community@mindspore.cn\n- Gitee Issue: https://gitee.com/mindspore/community/issues\n\n**参考来源：**\n- MindSpore 治理文档：https://gitee.com/mindspore/community/blob/master/governance.md\n- SIG 章程：https://gitee.com/mindspore/community/blob/master/sig-charter.md\n- TSC 邮件列表：mindspore-tsc@mindspore.cn\n- Gitee MindSpore: https://gitee.com/mindspore/community",
+    "citations": [
+      "https://gitee.com/mindspore/community/blob/master/governance.md",
+      "https://gitee.com/mindspore/community/blob/master/sig-charter.md",
+      "https://gitee.com/mindspore/community",
+      "https://openi.org.cn/mindspore/mindspore",
+      "https://gitee.com/mindspore/community/blob/master/tsc-charter.md",
+      "https://gitee.com/mindspore/community/issues/6789",
+      "https://www.mindspore.cn/community"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 7
+  },
+  {
+    "question_id": "q_045",
+    "platform": "qwen",
+    "query": "MindSpore TSC 是什么，它的职责和会议频率是怎样的？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore TSC（Technical Steering Committee）详解：**\n\n**1. TSC 基本信息** [MindSpore TSC 章程，2024](https://gitee.com/mindspore/community/blob/master/tsc-charter.md)\n\n**全称：** Technical Steering Committee（技术指导委员会）\n\n**定位：** MindSpore 社区的最高技术决策机构\n\n**2. 核心职责** [MindSpore 治理文档，2024](https://gitee.com/mindspore/community/blob/master/governance.md)\n\n**2.1 技术方向决策**\n- 制定技术发展路线图\n- 审批重大架构变更\n- 评估新技术引入\n\n**2.2 SIG 管理** [mindspore-tsc@mindspore.cn 邮件存档，2024](https://gitee.com/mindspore/community)\n- 审批新 SIG 成立申请\n- 监督 SIG 运营状况\n- 协调跨 SIG 协作\n\n**2.3 代码治理**\n- 审批 Commiter 提名\n- 处理重大 Issue 和争议\n- 制定代码规范和审核标准\n\n**2.4 社区治理**\n- 制定社区行为准则\n- 处理违规行为\n- 促进社区多样性与包容性\n\n**3. 成员构成** [MindSpore 官网，2024](https://www.mindspore.cn/community)\n\n**TSC 成员类型：**\n- **投票成员**：由现任 TSC 提名选举产生\n- **非投票成员**：SIG 负责人、特邀专家\n\n**成员背景：**\n- 华为 MindSpore 核心团队\n- 高校和研究机构学者\n- 企业用户代表\n- 社区杰出贡献者\n\n**4. 会议安排** [mindspore-tsc@mindspore.cn，2024](https://gitee.com/mindspore/community)\n\n**会议频率：月例会**\n\n**典型安排：**\n- 时间：每月第三周周四\n- 时长：1-2 小时\n- 平台：华为云会议\n- 纪要：公开发布到社区\n\n**会议议程：**\n1. 上月行动项回顾\n2. SIG 进展汇报\n3. 重要议题讨论与投票\n4. 新行动项分配\n\n**5. 会议公开性** [Gitee MindSpore，2024](https://gitee.com/mindspore/community/issues)\n\n**公开程度：**\n- 会议纪要：公开发布\n- 会议录音：部分公开\n- 投票结果：公开\n- 敏感议题：闭门讨论\n\n**社区成员参与：**\n- 可提前提交议题（邮件列表）\n- 可申请列席会议\n- 可在邮件列表讨论\n\n**6. 历史决策示例** [MindSpore 新闻，2024](https://www.mindspore.cn/news)\n\n**重大决策：**\n- 2.0 架构升级（2022 年）\n- MindScience 科学计算扩展（2023 年）\n- LLM 战略方向（2024 年）\n- 安全响应流程（2024 年）\n\n**7. 联系方式** [MindSpore 社区，2024](https://www.mindspore.cn/community/contact)\n\n**邮件列表：**\n- mindspore-tsc@mindspore.cn（TSC 内部）\n- dev@mindspore.cn（开发讨论）\n\n**议题提交：**\n- 发送至 dev@mindspore.cn\n- 主题：[TSC Agenda] 议题描述\n\n**参考来源：**\n- TSC 章程：https://gitee.com/mindspore/community/blob/master/tsc-charter.md\n- 治理文档：https://gitee.com/mindspore/community/blob/master/governance.md\n- TSC 邮件列表：mindspore-tsc@mindspore.cn\n- MindSpore 官网：https://www.mindspore.cn/community",
+    "citations": [
+      "https://gitee.com/mindspore/community/blob/master/tsc-charter.md",
+      "https://gitee.com/mindspore/community/blob/master/governance.md",
+      "https://gitee.com/mindspore/community",
+      "https://www.mindspore.cn/community",
+      "https://gitee.com/mindspore/community/issues",
+      "https://www.mindspore.cn/news"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": [],
+    "citations_to_official": 6
+  },
+  {
+    "question_id": "q_047",
+    "platform": "qwen",
+    "query": "MindSpore 有哪些 SIG（Special Interest Groups）？各个 SIG 负责什么方向？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore SIG（特殊兴趣小组）完整列表：**\n\n**1. 活跃 SIG 列表** [MindSpore SIG 列表，2024](https://gitee.com/mindspore/community/issues/6789)\n\n| SIG 名称 | 负责方向 | 例会频率 |\n|---------|---------|----------|\n| Transformers SIG | 大模型/NLP/Transformers 架构 | 双周 |\n| LLM Inference Serving SIG | 大模型推理服务化 | 双周 |\n| Parallel Training System SIG | 分布式并行训练系统 | 月度 |\n| MindQuantum SIG | 量子计算与 AI 融合 | 月度 |\n| Security SIG | 安全漏洞响应与修复 | 按需 |\n| Usability SIG | 开发者体验/文档/工具链 | 月度 |\n| MindScience SIG | 科学计算应用 | 月度 |\n\n**2. 各 SIG 详细介绍**\n\n**2.1 Transformers SIG** [MindNLP 文档，2024](https://gitee.com/mindspore/mindnlp)\n**方向：** NLP 与大模型技术\n- 支持 LLaMA、ChatGLM、Baichuan 等模型\n- MindNLP 库开发与维护\n- Transformer 架构优化\n\n**2.2 LLM Inference Serving SIG** [MindSpore Serving，2024](https://www.mindspore.cn/serving/docs/zh-CN/r2.8/index.html)\n**方向：** 大模型推理服务\n- vLLM 后端支持\n- Continuous batching\n- 流式输出 API\n\n**2.3 Parallel Training System SIG** [并行训练文档，2024](https://www.mindspore.cn/docs/zh-CN/r2.8/advanced/parallel.html)\n**方向：** 分布式训练\n- 自动并行策略\n- 通信优化\n- 大规模集群适配\n\n**2.4 MindQuantum SIG** [MindQuantum 文档，2024](https://www.mindspore.cn/mindquantum/docs/zh-CN/r0.9/index.html)\n**方向：** 量子计算\n- 量子机器学习\n- 量子线路模拟\n- 量子真机对接\n\n**2.5 Security SIG** [安全响应中心，2024](https://www.mindspore.cn/security)\n**方向：** 安全漏洞管理\n- CVE 漏洞响应\n- 安全编码规范\n- 依赖安全检查\n\n**2.6 Usability SIG** [Gitee MindSpore，2024](https://gitee.com/mindspore/community)\n**方向：** 开发者体验\n- 文档质量改进\n- API 易用性\n- 工具链优化\n\n**2.7 MindScience SIG** [MindScience 文档，2024](https://mindscience.openi.org.cn/)\n**方向：** 科学计算\n- 计算化学（MindChemistry）\n- 气象预报（MindWeather）\n- 流体力学仿真\n\n**3. 已暂停/合并的 SIG** [mindspore-tsc@mindspore.cn，2024](https://gitee.com/mindspore/community)\n\n| SIG 名称 | 状态 | 备注 |\n|---------|------|------|\n| Operator Development SIG | 合并 | 并入核心开发 |\n| Edge Computing SIG | 暂停 | 2023 年后暂停活动 |\n\n**4. 参与方式** [MindSpore 社区，2024](https://www.mindspore.cn/community)\n\n**加入步骤：**\n1. 订阅邮件列表：dev@mindspore.cn\n2. 查看 Gitee Issue 看板\n3. 参加 SIG 例会\n4. 认领任务\n\n**SIG 负责人联系：**\n- 邮件列表@提及对应 SIG\n- Gitee @mindspore-[sig-name]\n\n**5. 成立新 SIG** [SIG 章程，2024](https://gitee.com/mindspore/community/blob/master/sig-charter.md)\n\n**流程：**\n1. 准备提案（目标、范围、Roadmap）\n2. 邮件列表 RFC 讨论\n3. TSC 评审投票\n4. 正式成立\n\n**6. SIG 活跃度对比** [Gitee 数据统计，2024](https://gitee.com/mindspore/community)\n\n| SIG | Issue 数 | 提交数 | 活跃程度 |\n|-----|---------|--------|----------|\n| Transformers | 150+ | 500+ | ★★★★★ |\n| LLM Serving | 80+ | 300+ | ★★★★☆ |\n| Parallel | 100+ | 400+ | ★★★★☆ |\n| MindQuantum | 50+ | 150+ | ★★★☆☆ |\n| Security | 30+ | 100+ | ★★★☆☆ |\n\n**参考来源：**\n- SIG 列表：https://gitee.com/mindspore/community/issues/6789\n- MindSpore 社区：https://www.mindspore.cn/community\n- Gitee MindSpore: https://gitee.com/mindspore/mindspore\n- SIG 章程：https://gitee.com/mindspore/community/blob/master/sig-charter.md",
+    "citations": [
+      "https://gitee.com/mindspore/community/issues/6789",
+      "https://gitee.com/mindspore/mindnlp",
+      "https://www.mindspore.cn/serving/docs/zh-CN/r2.8/index.html",
+      "https://www.mindspore.cn/docs/zh-CN/r2.8/advanced/parallel.html",
+      "https://www.mindspore.cn/mindquantum/docs/zh-CN/r0.9/index.html",
+      "https://www.mindspore.cn/security",
+      "https://mindscience.openi.org.cn/",
+      "https://gitee.com/mindspore/community"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": ["LLaMA", "ChatGLM", "Baichuan", "vLLM"],
+    "citations_to_official": 8
+  },
+  {
+    "question_id": "q_048",
+    "platform": "qwen",
+    "query": "MindSpore 是否参加过 KubeCon 等国际开源峰会？",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "raw_response": "**MindSpore 参与国际开源峰会情况：**\n\n**1. KubeCon 参会历史** [mindspore-tsc@mindspore.cn 邮件存档，2022](https://gitee.com/mindspore/community)\n\n**KubeCon EU 2022（西班牙瓦伦西亚）** [Cloud Native Computing Foundation，2022](https://events.linuxfoundation.org/kubecon-cloudnativecon-europe/)\n- **演讲主题：** \"MindSpore: Cloud-Native Deep Learning Training and Inference Framework\"\n- **演讲者：** MindSpore 核心团队成员\n- **内容：** MindSpore 在云原生场景的应用与实践\n- **Keynote：** 被选为大会 Keynote 演讲之一\n\n**KubeCon NA 2022（美国底特律）**\n- 社区展示（Community Booth）\n- 技术闪电演讲（Lightning Talk）\n\n**KubeCon EU 2023（阿姆斯特丹）**\n- 专题演讲：MindSpore + Kubernetes 集成实践\n- 开发者工作坊\n\n**2. 其他国际开源峰会** [MindSpore 新闻，2024](https://www.mindspore.cn/news)\n\n**OSPS（Open Source Summit）**\n- 2022-2024 年连续参与\n- 主题：AI 框架与云原生融合\n\n**PyCon（Python 国际大会）**\n- MindSpore Python API 分享\n- 社区合作展示\n\n**NeurIPS / ICML / CVPR**\n- 赞助参展\n- 技术论文发表\n- 教程（Tutorial）举办\n\n**3. 国内峰会参与** [华为云新闻，2024](https://www.huaweicloud.com/news)\n\n**KubeCon + CloudNativeCon China**\n- 2023 年上海\n- 2024 年香港\n- 主题演讲 + 技术分论坛\n\n**中国开源年会（COSCon）**\n- 历届参会\n- MindSpore 技术演讲\n\n**华为全联接大会（HUAWEI CONNECT）**\n- MindSpore 新版本发布\n- 生态伙伴展示\n\n**4. 主办活动** [MindSpore 社区，2024](https://www.mindspore.cn/community)\n\n**MindSpore Summit**\n- 年度开发者大会\n- 2023 年：北京\n- 2024 年：上海\n- 规模：5000+ 开发者\n\n**技术工作坊**\n- 月度线上技术分享\n- 季度线下 Meetup\n- 高校巡回讲座\n\n**5. 未来参会计划** [dev@mindspore.cn，2025](https://gitee.com/mindspore/community)\n\n**2026 年预期参会：**\n- KubeCon EU 2026（巴黎）\n- KubeCon NA 2026（盐湖城）\n- KubeCon + CloudNativeCon China 2026\n- NeurIPS 2026（新奥尔良）\n\n**6. 获取参会信息** [MindSpore 社区，2024](https://www.mindspore.cn/community/events)\n\n| 渠道 | 内容 |\n|------|------|\n| 官网新闻 | 官方公告 |\n| 邮件列表 | 参会通知 |\n| 微信公众号 | 活动报名 |\n| B 站账号 | 会议直播 |\n\n**参考来源：**\n- TSC 邮件存档：mindspore-tsc@mindspore.cn\n- KubeCon 官方：https://events.linuxfoundation.org/kubecon-cloudnativecon-europe/\n- MindSpore 新闻：https://www.mindspore.cn/news\n- 华为云新闻：https://www.huaweicloud.com/news",
+    "citations": [
+      "https://gitee.com/mindspore/community",
+      "https://events.linuxfoundation.org/kubecon-cloudnativecon-europe/",
+      "https://www.mindspore.cn/news",
+      "https://www.huaweicloud.com/news",
+      "https://www.mindspore.cn/community",
+      "https://www.mindspore.cn/community/events"
+    ],
+    "status": "success",
+    "mentions_community": true,
+    "recommendation_position": "主体介绍",
+    "competitors_mentioned": ["KubeCon", "PyCon", "NeurIPS", "ICML", "CVPR"],
+    "citations_to_official": 6
+  }
+]
